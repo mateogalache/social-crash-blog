@@ -1,4 +1,4 @@
-import { generateAndUploadContent } from 'generateArticles';
+import { generateAndUploadContent } from '../generateArticles';
 
 export default async function handler() {
   try {
