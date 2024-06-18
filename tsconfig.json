@@ -4,7 +4,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@root/*": ["./*"]  // Añade esta línea para incluir paths fuera del src
+      "@root/*": ["./*"]
     }
   },
   "exclude": [
