@@ -1,0 +1,21 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import articleNames from '../../../nameArticles.json' assert { type: 'json' }
+import { getArticleContent } from 'configFireBase';
+
+export const getStaticPaths = () => {
+  return articleNames.slice(1).map((title) => ({
+    params: { id: title },
+  }));
+};
+const { id } = Astro.params
+const articleContent = await getArticleContent(id);
+
+
+---
+
+<Layout title="Blog">
+  <div class="px-0 py-0 sm:px-60 sm:py-20">
+    <div class="prose prose-lg max-w-none" set:html={articleContent}></div>
+  </div>
+</Layout>

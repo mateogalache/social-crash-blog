@@ -1,0 +1,18 @@
+---
+import { titles,saveTitlesToFile} from '../../../configFireBase'
+import Layout from '../../layouts/Layout.astro'
+import articleNames from '../../../nameArticles.json' assert { type: 'json' }
+
+
+await saveTitlesToFile();
+
+---
+
+<Layout title="Blog">
+  <h1 class="text-white">Artículos</h1>
+  <ul class="text-white">
+    {articleNames.map((title, index) => (
+      <li><a href={`/blog/${title}`}>{title}</a></li>
+    ))}
+  </ul>
+</Layout>
