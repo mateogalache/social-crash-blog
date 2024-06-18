@@ -1,3 +1,7 @@
+---
+    const {title} =  Astro.props;
+---
+
 <div
       class="relative flex max-w-[24rem] flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 max-h-[30rem] shadow-md"
     >
@@ -13,19 +17,13 @@
         <h4
           class="block font-sans antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"
         >
-          10 Pasos para Construir tu Marca Personal en Redes Sociales
+          {title}
         </h4>
-        <p
-          class="block mt-3 font-sans antialiased font-normal leading-relaxed text-gray-700"
-        >
-          Descubre cómo optimizar tu presencia en redes sociales con estos
-          consejos prácticos y recomendaciones de herramientas útiles para
-          programar contenido y diseñar publicaciones impactantes.
-        </p>
+        
       </div>
       <div class="p-6 pt-0">
         <a
-            href="./blog/blog1"
+            href={`/blog/${title}`}
           class="cursor-pointer align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
           type="button"
         >
