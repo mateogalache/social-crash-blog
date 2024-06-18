@@ -5,7 +5,7 @@ const openaiApiKey = 'YOUR_OPENAI_API_KEY';
 
 const openai = new OpenAI(
     {
-        apiKey: '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',
+        apiKey: process.env.MY_SECRET,
     }
 );
 
