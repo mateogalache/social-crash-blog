@@ -1,6 +1,6 @@
 import { generateAndUploadContent } from '../generateArticles';
 
-export default async function handler() {
+export async function handler() {
   try {
     await generateAndUploadContent();
     console.log('Artículo e imagen generados y subidos a Firebase Storage.');
