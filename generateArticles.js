@@ -5,7 +5,7 @@ const openaiApiKey = 'YOUR_OPENAI_API_KEY';
 
 const openai = new OpenAI(
     {
-        apiKey: 'sk-proj-MLXFogUgChs7nCsItaVjT3BlbkFJLlMzzdw7hdEt4GUPrvR2',
+        apiKey: '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',
     }
 );
 
