@@ -1,11 +1,11 @@
 ---
 import { titles,saveTitlesToFile} from '../../../configFireBase'
 import Layout from '../../layouts/Layout.astro'
-import articleNames from '../../../nameArticles.json' assert { type: 'json' }
-
+import articleNames from 'nameArticles.json' assert { type: 'json' }
+import { generateAndUploadContent } from 'generateArticles';
 
 await saveTitlesToFile();
-
+//await generateAndUploadContent();
 ---
 
 <Layout title="Blog">

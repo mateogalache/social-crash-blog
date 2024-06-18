@@ -16,6 +16,6 @@ const articleContent = await getArticleContent(id);
 
 <Layout title="Blog">
   <div class="px-0 py-0 sm:px-60 sm:py-20">
-    <div class="prose prose-lg max-w-none" set:html={articleContent}></div>
+    <div set:html={articleContent}></div>
   </div>
 </Layout>
