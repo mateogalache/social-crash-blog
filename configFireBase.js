@@ -39,14 +39,6 @@ async function getArticleContent(id) {
   return content.toString('utf8');
 }
 
-async function saveTitlesToFile() {
-  const titles = await listArticleTitles();
-  // Asegúrate de que el archivo no tenga comillas dobles al principio
-  const jsonContent = JSON.stringify(titles, null, 2);
-  await fs.writeFile('nameArticles.json', jsonContent);
-}
 
-// Genera el archivo nameArticles.json al iniciar
-saveTitlesToFile().catch(console.error);
 
-export { storage, admin, titles, getArticleContent, saveTitlesToFile };
+export { storage, admin, titles, getArticleContent };

@@ -1,7 +1,6 @@
 import {  OpenAI } from 'openai';
 import { storage } from './configFireBase.js';
 
-const openaiApiKey = 'YOUR_OPENAI_API_KEY';
 
 const openai = new OpenAI(
     {

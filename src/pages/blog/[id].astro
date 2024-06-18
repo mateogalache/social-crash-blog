@@ -1,10 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import articleNames from '../../../nameArticles.json' assert { type: 'json' }
-import { getArticleContent } from 'configFireBase';
+import { titles,getArticleContent } from 'configFireBase';
 
 export const getStaticPaths = () => {
-  return articleNames.slice(1).map((title) => ({
+  return titles.slice(1).map((title) => ({
     params: { id: title },
   }));
 };
