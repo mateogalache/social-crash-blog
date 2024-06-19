@@ -1,8 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getArticleContent,getTitles,titles } from 'configFireBase';
+import { getArticleContent, saveTitlesToFile,titles } from 'configFireBase';
+import articleNames from 'nameArticles.json' assert { type: 'json' }
 
-await getTitles();
+await saveTitlesToFile();
 
 export const getStaticPaths = () => {
   return titles.slice(1).map((title) => ({

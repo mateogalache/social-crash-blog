@@ -29,10 +29,8 @@ async function listArticleTitles() {
 
   return titles;
 }
+
 const titles = await listArticleTitles();
-async function getTitles(){
-  const titles = await listArticleTitles();
-}
 
 async function getArticleContent(id) {
   const file = storage.bucket().file(`articulos/${id}.html`);
@@ -40,6 +38,15 @@ async function getArticleContent(id) {
   return content.toString('utf8');
 }
 
+async function saveTitlesToFile() {
+  try{
+    const titles = await listArticleTitles();
+    const jsonContent = JSON.stringify(titles, null, 2);
+    await fs.writeFile('nameArticles.json', jsonContent);
 
+  } catch (error) {
+    console.error('Error saving titles to file:', error);
+  }
+}
 
-export { storage, admin, listArticleTitles, getArticleContent,titles,getTitles };
+export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,titles };
