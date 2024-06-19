@@ -1,5 +1,6 @@
 import admin from 'firebase-admin';
 import keysFireBase from './serviceAccountKey.json' assert { type: 'json' };
+import fs from 'fs/promises'; 
 
 const serviceAccount = {
   type: keysFireBase.type,
