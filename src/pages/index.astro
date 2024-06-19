@@ -4,8 +4,6 @@ import { listArticleTitles,saveTitlesToFile} from '../../configFireBase'
 import Layout from '../layouts/Layout.astro'
 import articleNames from 'nameArticles.json' assert { type: 'json' }
 
-await saveTitlesToFile();
-
 const titles = await listArticleTitles();
 ---
 

@@ -40,14 +40,12 @@ async function getArticleContent(id) {
 }
 
 async function saveTitlesToFile() {
-  try{
+  
     const titles = await listArticleTitles();
     const jsonContent = JSON.stringify(titles, null, 2);
     await fs.writeFile('nameArticles.json', jsonContent);
 
-  } catch (error) {
-    console.error('Error saving titles to file:', error);
-  }
+  
 }
 
 export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,titles };
