@@ -1,5 +1,4 @@
 import admin from 'firebase-admin';
-import fs from 'fs/promises';  // Usa el módulo fs de Node.js para trabajar con el sistema de archivos
 import keysFireBase from './serviceAccountKey.json' assert { type: 'json' };
 
 const serviceAccount = {

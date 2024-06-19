@@ -1,5 +1,5 @@
 import {  OpenAI } from 'openai';
-import { storage } from './configFireBase.js';
+import { storage } from '../configFireBase.js';
 
 
 const openai = new OpenAI(
