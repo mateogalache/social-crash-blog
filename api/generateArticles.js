@@ -94,7 +94,7 @@ async function uploadImageFromUrlToFirebaseStorage(imageUrl, destination) {
 
 export async function generateAndUploadContent() {
 
-    for (var i = 0;i<10;i++)
+    for (var i = 0;i<2;i++)
     {
 
         // Generar artículo
