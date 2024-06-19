@@ -1,9 +1,9 @@
-import { generateAndUploadContent } from './generateArticles.js';
+import { saveTitlesToFile } from '../configFireBase.js';
 
 export default async function handler () {
   try {
-    await generateAndUploadContent();
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
+    await saveTitlesToFile();
+    console.log('Artículo e imagen generados y subidos a json.');
   } catch (error) {
     console.error('Error al generar y subir el contenido:', error);
   }

@@ -3,10 +3,17 @@
     {
       "path": "/api/cron",
       "schedule": "0 22 * * *"
+    },
+    {
+      "path":"/api/name",
+      "schedule": "5 22 * * *"
     }
   ],
   "functions": {
     "api/cron.ts": {
+      "maxDuration": 60 
+    },
+    "api/name.ts": {
       "maxDuration": 60 
     }
   }
