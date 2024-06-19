@@ -96,7 +96,6 @@ export async function generateAndUploadContent() {
 
     for (var i = 0;i<2;i++)
     {
-
         // Generar artículo
         const articleHtml = await generateArticle(orden[i]);
         const date = new Date();
