@@ -30,7 +30,6 @@ async function listArticleTitles() {
   return titles;
 }
 
-const titles = await listArticleTitles();
 
 async function getArticleContent(id) {
   const file = storage.bucket().file(`articulos/${id}.html`);
@@ -40,4 +39,4 @@ async function getArticleContent(id) {
 
 
 
-export { storage, admin, titles, getArticleContent };
+export { storage, admin, listArticleTitles, getArticleContent };

@@ -1,7 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { titles,getArticleContent } from 'configFireBase';
+import { listArticleTitles,getArticleContent } from 'configFireBase';
 
+const titles = await listArticleTitles();
 export const getStaticPaths = () => {
   return titles.slice(1).map((title) => ({
     params: { id: title },

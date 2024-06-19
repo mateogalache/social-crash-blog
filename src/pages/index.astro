@@ -1,11 +1,12 @@
 ---
 import Portada from '@/components/Portada.astro';
-import { titles} from '../../configFireBase'
+import { listArticleTitles} from '../../configFireBase'
 import Layout from '../layouts/Layout.astro'
 //import articleNames from 'nameArticles.json' assert { type: 'json' }
 
 
 //await generateAndUploadContent();
+const titles = await listArticleTitles();
 ---
 
 <Layout title="Blog">
