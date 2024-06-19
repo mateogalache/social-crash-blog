@@ -1,4 +1,4 @@
-import { generateAndUploadContent } from './generateArticles';
+import { generateAndUploadContent } from './generateArticles.js';
 
 export const handler = async () => {
   try {
