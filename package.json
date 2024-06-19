@@ -1,6 +1,5 @@
 {
-  "name": "pale-phase",
-  "type": "module",
+  "name": "social-crash",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
