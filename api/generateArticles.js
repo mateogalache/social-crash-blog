@@ -1,5 +1,5 @@
 import {  OpenAI } from 'openai';
-import { storage } from '../configFireBase.js';
+import { listArticleTitles, storage } from '../configFireBase.js';
 
 
 const openai = new OpenAI(
@@ -94,13 +94,14 @@ async function uploadImageFromUrlToFirebaseStorage(imageUrl, destination) {
 
 export async function generateAndUploadContent() {
 
-    for (var i = 0;i<2;i++)
+    for (var i = 0;i<1;i++)
     {
         // Generar artículo
         const articleHtml = await generateArticle(orden[i]);
         const date = new Date();
         // Subir artículo a Firebase Storage
         await uploadFileToFirebaseStorage(articleHtml, `articulos/article-${orden[i]}-${date}.html`, 'text/html');
+        await listArticleTitles();
     }
 
   // Generar imagen
