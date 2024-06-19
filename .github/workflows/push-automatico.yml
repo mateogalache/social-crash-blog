@@ -1,0 +1,33 @@
+name: Push Automático
+
+on:
+  schedule:
+    - cron: '10 0 * * *'
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Git
+      run: |
+        git config --global user.name 'mateogalache'
+        git config --global user.email 'mateogalache12@gmail.com'
+
+    - name: Hacer cambios en el repositorio
+      run: |
+        # Aquí puedes agregar los comandos para hacer cambios en tu repositorio
+        # Por ejemplo, puedes actualizar archivos, generar contenido, etc.
+        # En este ejemplo, vamos a agregar un archivo de ejemplo
+        echo "Contenido del archivo" > archivo-ejemplo.txt
+        git add archivo-ejemplo.txt
+
+    - name: Commit and Push changes
+      run: |
+        git commit -m "Actualización automática diaria"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
