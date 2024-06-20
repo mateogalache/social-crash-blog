@@ -123,7 +123,7 @@ export async function generateAndUploadContent() {
   // Subir imagen a Firebase Storage
   //await uploadImageFromUrlToFirebaseStorage(imageUrl, 'images/brand_personal.png');
 }
-export async function generateAndUploadContent2() {
+export async function generateAndUploadContent2() { 
 
     for (var i = 2;i<4;i++)
     {
