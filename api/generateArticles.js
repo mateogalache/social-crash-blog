@@ -91,7 +91,12 @@ async function uploadImageFromUrlToFirebaseStorage(imageUrl, destination) {
   });
   console.log(`Image uploaded to ${destination}`);
 }
-
+function formatDate(date) {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
+}
 export async function generateAndUploadContent() {
 
     for (var i = 0;i<1;i++)
@@ -99,8 +104,9 @@ export async function generateAndUploadContent() {
         // Generar artículo
         const articleHtml = await generateArticle(orden[i]);
         const date = new Date();
+        const formattedDate = formatDate(date);
         // Subir artículo a Firebase Storage
-        await uploadFileToFirebaseStorage(articleHtml, `articulos/article-${orden[i]}-${date}.html`, 'text/html');
+        await uploadFileToFirebaseStorage(articleHtml, `articulos/article-${orden[i]}-${formattedDate}.html`, 'text/html');
     }
 
   // Generar imagen

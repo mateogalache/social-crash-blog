@@ -2,7 +2,7 @@ name: Push Automático
 
 on:
   schedule:
-    - cron: '10 22 * * *'
+    - cron: '00 23 * * *'
 
 jobs:
   push:
@@ -19,15 +19,13 @@ jobs:
 
     - name: Hacer cambios en el repositorio
       run: |
-        # Aquí puedes agregar los comandos para hacer cambios en tu repositorio
-        # Por ejemplo, puedes actualizar archivos, generar contenido, etc.
-        # En este ejemplo, vamos a agregar un archivo de ejemplo
-        echo "Contenido del archivo" > archivo-ejemplo.txt
-        git add archivo-ejemplo.txt
+        # Añadir una línea con la fecha y hora actuales al archivo log.txt
+        echo "Actualización automática: $(date)" >> log.txt
+        git add log.txt
 
     - name: Commit and Push changes
       run: |
-        git commit -m "Actualización automática diaria"
+        git commit -m "Actualización automática diaria: $(date)"
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
