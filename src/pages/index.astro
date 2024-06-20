@@ -1,10 +1,25 @@
 ---
 import Portada from '@/components/Portada.astro';
-import { listArticleTitles,getArticleImage} from '../../configFireBase'
-import Layout from '../layouts/Layout.astro'
-import articleNames from 'nameArticles.json' assert { type: 'json' }
+import { listArticleTitles, getArticleImage } from '../../configFireBase';
+import Layout from '../layouts/Layout.astro';
+import articleNames from 'nameArticles.json' assert { type: 'json' };
+
+interface ImageMap {
+  [key: string]: string;
+}
 
 const titles = await listArticleTitles();
+
+const images: ImageMap = {};
+for (const title of titles.slice(1)) {
+  try {
+    console.log(title)
+    images[title] = await getArticleImage(title);
+  } catch (error) {
+    console.error(`Error fetching image for ${titles}:`, error);
+    images[title] = 'hola.png'; // Asegúrate de tener una imagen por defecto
+  }
+}
 ---
 
 <Layout title="Blog">
@@ -13,8 +28,8 @@ const titles = await listArticleTitles();
     
     <div class="flex flex-wrap gap-5 mt-10 md:justify-start justify-center">
       {titles.slice(1).map((title, index) => (
-        <Portada title={title} image={getArticleImage(title)}></Portada>
-    ))}   
+        <Portada key={index} title={title} image={images[title]}></Portada>
+      ))}   
     </div>
   </div>
 </Layout>

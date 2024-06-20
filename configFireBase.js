@@ -39,10 +39,17 @@ async function getArticleContent(id) {
   return content.toString('utf8');
 }
 async function getArticleImage(id) {
-  const file = storage.bucket().file(`images/${id}.png`);
-  const [content] = await file.download();
-  return content.toString('utf8');
+  try {
+    const file = storage.bucket().file(`images/${id}.png`);
+    const [content] = await file.download();
+    const base64Image = content.toString('base64');
+    return `data:image/png;base64,${base64Image}`;
+  } catch (error) {
+    console.error(`Error fetching image for ${id}:`, error);
+    throw error; // O maneja el error de otra manera, si prefieres
+  }
 }
+
 
 async function saveTitlesToFile() {
   
@@ -52,5 +59,7 @@ async function saveTitlesToFile() {
 
   
 }
+
+
 
 export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,titles,getArticleImage };
