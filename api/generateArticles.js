@@ -113,7 +113,7 @@ export async function generateAndUploadContent() {
         const date = new Date();
         const formattedDate = formatDate(date);
         // Subir artículo a Firebase Storage
-        await uploadFileToFirebaseStorage(articleHtml, `articulos/${articleTitle}-${formattedDate}.html`, 'text/html');
+        await uploadFileToFirebaseStorage(articleHtml, `articulos/${articleTitle.replaceAll(' ','-')}-${formattedDate}.html`, 'text/html');
     }
 
   // Generar imagen
