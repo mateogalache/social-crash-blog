@@ -99,7 +99,26 @@ function formatDate(date) {
 }
 export async function generateAndUploadContent() {
 
-    for (var i = 0;i<1;i++)
+    for (var i = 0;i<2;i++)
+    {
+        // Generar artículo
+        const articleHtml = await generateArticle(orden[i]);
+        const date = new Date();
+        const formattedDate = formatDate(date);
+        // Subir artículo a Firebase Storage
+        await uploadFileToFirebaseStorage(articleHtml, `articulos/article-${orden[i]}-${formattedDate}.html`, 'text/html');
+    }
+
+  // Generar imagen
+  //const imagePrompt = 'Una imagen que represente la construcción de una marca personal en redes sociales';
+  //const imageUrl = await generateImage(imagePrompt);
+
+  // Subir imagen a Firebase Storage
+  //await uploadImageFromUrlToFirebaseStorage(imageUrl, 'images/brand_personal.png');
+}
+export async function generateAndUploadContent2() {
+
+    for (var i = 2;i<4;i++)
     {
         // Generar artículo
         const articleHtml = await generateArticle(orden[i]);
