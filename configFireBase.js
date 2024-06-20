@@ -38,6 +38,11 @@ async function getArticleContent(id) {
   const [content] = await file.download();
   return content.toString('utf8');
 }
+async function getArticleImage(id) {
+  const file = storage.bucket().file(`images/${id}.png`);
+  const [content] = await file.download();
+  return content.toString('utf8');
+}
 
 async function saveTitlesToFile() {
   
@@ -48,4 +53,4 @@ async function saveTitlesToFile() {
   
 }
 
-export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,titles };
+export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,titles,getArticleImage };

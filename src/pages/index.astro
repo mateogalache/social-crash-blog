@@ -1,6 +1,6 @@
 ---
 import Portada from '@/components/Portada.astro';
-import { listArticleTitles,saveTitlesToFile} from '../../configFireBase'
+import { listArticleTitles,getArticleImage} from '../../configFireBase'
 import Layout from '../layouts/Layout.astro'
 import articleNames from 'nameArticles.json' assert { type: 'json' }
 
@@ -13,7 +13,7 @@ const titles = await listArticleTitles();
     
     <div class="flex flex-wrap gap-5 mt-10 md:justify-start justify-center">
       {titles.slice(1).map((title, index) => (
-        <Portada title={title}></Portada>
+        <Portada title={title} image={getArticleImage(title)}></Portada>
     ))}   
     </div>
   </div>

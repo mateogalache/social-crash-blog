@@ -85,7 +85,7 @@ async function uploadFileToFirebaseStorage(content, destination, contentType) {
 
 async function generateImage(prompt) {
   const response = await openai.images.generate({ model: "dall-e-3", prompt: prompt });
-  const imageUrl = response.data;
+  const imageUrl = response.data[0].url;
   return imageUrl;
 }
 
@@ -104,9 +104,9 @@ function formatDate(date) {
   const year = date.getFullYear();
   return `${day}-${month}-${year}`;
 }
-export async function generateAndUploadContent() {
+export async function generateAndUploadContent(start,end) {
 
-    for (var i = 0;i<2;i++)
+    for (var i = start;i<end;i++)
     {
         // Generar artículo
         const {articleHtml,articleTitle} = await generateArticle(orden[i]);
@@ -114,31 +114,13 @@ export async function generateAndUploadContent() {
         const formattedDate = formatDate(date);
         // Subir artículo a Firebase Storage
         await uploadFileToFirebaseStorage(articleHtml, `articulos/${articleTitle.replaceAll(' ','-')}-${formattedDate}.html`, 'text/html');
+        // Generar imagen
+        const imagePrompt = `Una imagen que represente ${articleTitle}`;
+        const imageUrl = await generateImage(imagePrompt);
+      
+        // Subir imagen a Firebase Storage
+          await uploadImageFromUrlToFirebaseStorage(imageUrl, `images/${articleTitle.replaceAll(' ','-')}-${formattedDate}.png`);
     }
 
-  // Generar imagen
-  //const imagePrompt = 'Una imagen que represente la construcción de una marca personal en redes sociales';
-  //const imageUrl = await generateImage(imagePrompt);
-
-  // Subir imagen a Firebase Storage
-  //await uploadImageFromUrlToFirebaseStorage(imageUrl, 'images/brand_personal.png');
 }
-export async function generateAndUploadContent2() { 
 
-    for (var i = 2;i<4;i++)
-    {
-        // Generar artículo
-        const {articleHtml,articleTitle} = await generateArticle(orden[i]);
-        const date = new Date();
-        const formattedDate = formatDate(date);
-        // Subir artículo a Firebase Storage
-        await uploadFileToFirebaseStorage(articleHtml, `articulos/${articleTitle.replaceAll(' ','-')}-${formattedDate}.html`, 'text/html');
-    }
-
-  // Generar imagen
-  //const imagePrompt = 'Una imagen que represente la construcción de una marca personal en redes sociales';
-  //const imageUrl = await generateImage(imagePrompt);
-
-  // Subir imagen a Firebase Storage
-  //await uploadImageFromUrlToFirebaseStorage(imageUrl, 'images/brand_personal.png');
-}
