@@ -1,13 +1,12 @@
 import admin from 'firebase-admin';
-import keysFireBase from './serviceAccountKey.json' assert { type: 'json' };
 import fs from 'fs/promises'; 
 
 const serviceAccount = {
-  type: keysFireBase.type,
-  project_id: keysFireBase.project_id,
-  private_key_id: keysFireBase.private_key_id,
-  private_key: keysFireBase.private_key,
-  client_email: keysFireBase.client_email,
+  type: process.env.TYPE,
+  project_id: process.env.PROJECT_ID,
+  private_key_id: process.env.PRIVATE_KEY_ID,
+  private_key: process.env.PRIVATE_KEY,
+  client_email: process.env.CLIENT_EMAIL,
 };
 
 if (!admin.apps.length) {
