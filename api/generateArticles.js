@@ -74,7 +74,7 @@ const temas = [
       "Diseñadores de Tecnología Usable",
       "Técnicos en Energía Renovable",
       "Analistas de Ciberseguridad",
-      "Ingenieros de Gemelos Digitales",
+      "Ingenieros de Gemelos Digitales", 
       "Especialistas en Tecnología Sostenible",
       "Ingeniería de Computación Cuántica",
       "Especialistas en Privacidad de Datos",
