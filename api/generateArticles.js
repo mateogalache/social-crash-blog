@@ -118,7 +118,7 @@ export async function generateArticle(orden) {
   });
  
   console.log(response.choices[0]);
-  const articleContent = response.choices[0].message.content;
+  const articleContent = response.choices[0].message.content; 
 
   // Extraer el título del contenido generado
   const titleMatch = articleContent.match(/<h1 class='text-2xl text-center'><strong>(.*?)<\/strong><\/h1>/);
