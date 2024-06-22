@@ -22,7 +22,7 @@ const newArticleContent = match ? match[0] : 'Artículo no disponible, perdona l
 console.log('Match found:', newArticleContent);
 ---
 
-<Layout title="Blog">
+<Layout title={id.slice(0,-11).replaceAll('-',' ')}>
   <div class="px-0 py-0 sm:px-60 sm:py-20">
       <div set:html={newArticleContent}></div>
   </div>
