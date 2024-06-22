@@ -8,3 +8,4 @@ export default async function handler () {
     console.error('Error al generar y subir el contenido:', error);
   }
 }
+ 
