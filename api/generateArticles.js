@@ -173,12 +173,11 @@ function formatDate(date) {
   const year = date.getFullYear();
   return `${day}-${month}-${year}`;
 }
-export async function generateAndUploadContent(start,end) {
+export async function generateAndUploadContent(order) {
 
-    for (var i = start;i<end;i++)
-    {
+    
         // Generar artículo
-        const {articleHtml,articleTitle} = await generateArticle(i);
+        const {articleHtml,articleTitle} = await generateArticle(order);
         const date = new Date();
         const formattedDate = formatDate(date);
         // Subir artículo a Firebase Storage
@@ -189,7 +188,7 @@ export async function generateAndUploadContent(start,end) {
       
         // Subir imagen a Firebase Storage
           await uploadImageFromUrlToFirebaseStorage(imageUrl, `images/${articleTitle.replaceAll(' ','-')}-${formattedDate}.png`);
-    }
+    
 
 }
 
