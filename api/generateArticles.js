@@ -97,7 +97,7 @@ export async function generateArticle(orden) {
     model: 'gpt-3.5-turbo',
     messages: [{ 
         role: "system", 
-        content: `Haz un articulo sobre ${temas[orden][day - 1]}. Hazlo en formato html siguiendo las siguiente instrucciones:
+        content: `Haz un articulo sobre ${temas[orden][day - 1]} entre 600 y 1200 palabras. Hazlo en formato html siguiendo las siguiente instrucciones:
         1. Todo debe estar en este div: <div class='p-10 pb-16 flex flex-col gap-5 bg-gray-800 rounded-lg relative'>
         2. el titulo debe estar en <h1 class='text-2xl text-center'><strong>
         3. el texto normal lo pondrás en 'p' y los subitulos de los diferentes parrafos con strong.
