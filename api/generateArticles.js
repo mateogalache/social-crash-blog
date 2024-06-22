@@ -120,7 +120,7 @@ export async function generateArticle(orden) {
         En link del producto tienes que poner un link a donde se pueda comprar el producto recomendado ya sea en amazon o en otro sitio de compras, no es necesario poner productos recomendados solo si en el articulo se puede, si recomiendas un producto de amazon añade en el link tag=mxgxg-21 para que pueda hacer un seguimiento, este es un ejemplo de un link a amazon con el tag puesto: https://www.amazon.es/AZDelivery-Pantalla-77-Pulgadas-160-p%C3%ADxeles-Display/dp/B078JBBPXK/?_encoding=UTF8&tag=mxgxg-21&pd_rd_w=nuzsE&content-id=amzn1.sym.09eeb54b-ad82-4370-8c5a-83121b4384f3%3Aamzn1.symc.ecead27c-800a-401e-a631-4760610d717a&pf_rd_p=09eeb54b-ad82-4370-8c5a-83121b4384f3&pf_rd_r=KJKJH19EMQHQQ3X7DEBP&pd_rd_wg=DIcGE&pd_rd_r=cdc25476-10eb-4f2a-a654-355d6594d957&ref_=pd_hp_d_atf_ci_mcx_mr_hp_atf_m&th=1 . Para coger el link de la imagen copia de la direccion de la imagen del link que t pases de amazon. El producto debe tener relacion con el articulo escrito si no no lo pongas.`
     }]
   });
-
+ 
   console.log(response.choices[0]);
   const articleContent = response.choices[0].message.content;
 
