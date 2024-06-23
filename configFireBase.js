@@ -14,7 +14,7 @@ if (!admin.apps.length) {
     credential: admin.credential.cert(serviceAccount),
     storageBucket: "social-crash.appspot.com",
   });
-}
+} 
 
 const storage = admin.storage();
 
