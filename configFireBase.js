@@ -9,7 +9,7 @@ const serviceAccount = {
   client_email: process.env.CLIENT_EMAIL,
 };
 
-if (!admin.apps.length) {
+if (!admin.apps.length) { 
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     storageBucket: "social-crash.appspot.com",
