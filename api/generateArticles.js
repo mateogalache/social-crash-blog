@@ -167,22 +167,27 @@ function formatDate(date) {
   const year = date.getFullYear();
   return `${day}-${month}-${year}`;
 }
+function removeAccents(str) {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
 export async function generateAndUploadContent(order) {
-
-    
-        // Generar artículo
-        const {articleHtml,articleTitle} = await generateArticle(order);
-        const date = new Date();
-        const formattedDate = formatDate(date);
-        // Subir artículo a Firebase Storage
-        await uploadFileToFirebaseStorage(articleHtml, `articulos/${articleTitle.replaceAll(' ','-')}-${formattedDate}.html`, 'text/html');
-        // Generar imagen
-        const imagePrompt = `Una imagen realista de ${articleTitle}`;
-        const imageUrl = await generateImage(imagePrompt);
-      
-        // Subir imagen a Firebase Storage
-          await uploadImageFromUrlToFirebaseStorage(imageUrl, `images/${articleTitle.replaceAll(' ','-')}-${formattedDate}.png`);
-    
-
+  // Generar artículo
+  const { articleHtml, articleTitle } = await generateArticle(order);
+  const date = new Date();
+  const formattedDate = formatDate(date);
+  
+  // Quitar tildes del título del artículo
+  const cleanTitle = removeAccents(articleTitle).replaceAll(' ', '-');
+  
+  // Subir artículo a Firebase Storage
+  await uploadFileToFirebaseStorage(articleHtml, `articulos/${cleanTitle}-${formattedDate}.html`, 'text/html');
+  
+  // Generar imagen
+  const imagePrompt = `Una imagen realista de ${articleTitle}`;
+  const imageUrl = await generateImage(imagePrompt);
+  
+  // Subir imagen a Firebase Storage
+  await uploadImageFromUrlToFirebaseStorage(imageUrl, `images/${cleanTitle}-${formattedDate}.png`);
 }
 
