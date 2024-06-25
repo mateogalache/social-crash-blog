@@ -1,12 +1,11 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getArticleContent, saveTitlesToFile,titlesDeportes } from 'configFireBase';
+import { getArticleContent, titlesDeportes } from 'configFireBase';
 
-await saveTitlesToFile();
-
-
+console.log(titlesDeportes);
 
 export const getStaticPaths = () => {
+  console.log(titlesDeportes);
   return titlesDeportes.slice(1).map((title) => ({
     params: { id: title },
   }));
