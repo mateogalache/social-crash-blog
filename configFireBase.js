@@ -29,8 +29,26 @@ async function listArticleTitles() {
 
   return titles;
 }
-
 const titles = await listArticleTitles();
+
+function removeAccents(str) {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+
+async function listArticleTitles2() {
+  const [files] = await storage.bucket().getFiles({ prefix: 'articulos/tecnologia/' });
+  const titles = [];
+
+  for (const file of files) {
+    const fileName = file.name.replace('articulos/tecnologia/', '').replace('.html', '');
+    titles.push(fileName);
+  }
+
+  return removeAccents(titles);
+}
+
+const titles2 = await listArticleTitles();
 
 async function getArticleContent(id) {
   const file = storage.bucket().file(`articulos/tecnologia/${id}.html`);
@@ -61,4 +79,4 @@ async function saveTitlesToFile() {
 
 
 
-export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,titles,getArticleImage };
+export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,titles,getArticleImage,titles2 };
