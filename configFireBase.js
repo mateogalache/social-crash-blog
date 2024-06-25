@@ -31,25 +31,6 @@ async function listArticleTitles() {
 }
 const titles = await listArticleTitles();
 
-function removeAccents(str) {
-  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-}
-
-
-async function listArticleTitles2() {
-  const [files] = await storage.bucket().getFiles({ prefix: 'articulos/tecnologia/' });
-  const titles = [];
-
-  for (const file of files) {
-    const fileName = file.name.replace('articulos/tecnologia/', '').replace('.html', '');
-    titles.push(fileName);
-  }
-
-  return removeAccents(titles);
-}
-
-const titles2 = await listArticleTitles();
-
 async function getArticleContent(id) {
   const file = storage.bucket().file(`articulos/tecnologia/${id}.html`);
   const [content] = await file.download();
@@ -58,7 +39,7 @@ async function getArticleContent(id) {
 
 
 async function getArticleTitle(id) {
-  const articleContent = getArticleContent(id);
+  const articleContent = await getArticleContent(id);
   const titleMatch = articleContent.match(/<h1 class='text-2xl text-center'><strong>(.*?)<\/strong><\/h1>/);
   const articleTitle = titleMatch ? titleMatch[1] : 'Título no encontrado';
 
