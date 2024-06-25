@@ -29,7 +29,7 @@ const articleFirst: Title2Map = {}; // Initialize as an object
 const articleCategory: Title3Map = {}; // Initialize as an object
 const articleCategory2: Title4Map = {}; // Initialize as an object
 const date = new Date();
-const day = date.getDate() - 1;
+const day = date.getDate();
 
 async function fetchData(titles: string[], category: string) {
   for (const title of titles.slice(1)) {
