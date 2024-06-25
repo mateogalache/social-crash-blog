@@ -1,5 +1,5 @@
 ---
-    const {title,image,cleanTitle,category,phrase,newCategory} =  Astro.props;
+    const {title,image,cleanTitle,category,phrase,newCategory} =  Astro.props
 ---
 
 
@@ -10,7 +10,6 @@
         <p class="font-black text-sm">{category}</p>
     </div>
     <div class="h-[100%] overflow-hidden w-2/5">
-        {/* Añade las clases de transformación y transición a la imagen */}
         <img src={image} alt="" class="object-contain transition-transform duration-300 ease-in-out hover:scale-110">
     </div>
 </a>
