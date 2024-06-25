@@ -86,6 +86,20 @@ async function getArticleImage(id,category) {
   }
 }
 
+async function getArticleFirstPhrase(id,category){
+  const articleContent = await getArticleContent(id,category);
+  var match = articleContent.match(/<p>(.*?)<\/p>/);
+  var primerOracion = "Leer más...";
+  if (match) {
+    // Extraemos el texto del primer grupo de captura que está entre las etiquetas <p>
+    var textoCompleto = match[1];
+    
+    // Ahora buscamos hasta el primer punto para obtener solo la primera oración
+    var primerOracion = textoCompleto.split('.')[0];
+
+  }
+  return primerOracion;
+}
 
 async function saveTitlesToFile() {
   
@@ -97,5 +111,5 @@ async function saveTitlesToFile() {
 }
 
 
-export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,getArticleImage,getArticleTitle,titlesEducacion,titlesDeportes,titlesEntretenimiento,titlesFinanzas,titlesGaming,titlesModa,titlesMotor,titlesNutricion,titlesPolitica,titlesSalud,titlesTecnologia,titlesViajes };
+export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,getArticleImage,getArticleTitle,getArticleFirstPhrase,titlesEducacion,titlesDeportes,titlesEntretenimiento,titlesFinanzas,titlesGaming,titlesModa,titlesMotor,titlesNutricion,titlesPolitica,titlesSalud,titlesTecnologia,titlesViajes };
 

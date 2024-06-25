@@ -1,7 +1,7 @@
 ---
 import Portada from '@/components/Portada.astro';
 import Article from '@/components/Article.astro';
-import { getArticleImage, getArticleTitle,getArticleFirstPhrase,titlesDeportes,titlesEducacion,titlesEntretenimiento,titlesFinanzas,titlesGaming,titlesModa,titlesMotor,titlesNutricion,titlesPolitica,titlesSalud,titlesTecnologia,titlesViajes } from '../../configFireBase';
+import { getArticleImage, getArticleTitle, getArticleFirstPhrase, titlesDeportes, titlesEducacion, titlesEntretenimiento, titlesFinanzas, titlesGaming, titlesModa, titlesMotor, titlesNutricion, titlesPolitica, titlesSalud, titlesTecnologia, titlesViajes } from '../../configFireBase';
 import Layout from '../layouts/Layout.astro';
 
 interface ImageMap {
@@ -11,46 +11,80 @@ interface ImageMap {
 interface TitleMap {
   [key: string]: string;
 }
+
 interface Title2Map {
+  [key: string]: string;
+}
+
+interface Title3Map {
   [key: string]: string;
 }
 
 const images: ImageMap = {};
 const articleTitles: TitleMap = {}; // Initialize as an object
 const articleFirst: Title2Map = {}; // Initialize as an object
-let i = 0;
+const articleCategory: Title3Map = {}; // Initialize as an object
+const date = new Date();
+const day = date.getDate() - 1;
 
-for (const title of titlesDeportes.slice(1)) {
-  try {
-    console.log(title)
-    images[title] = await getArticleImage(title,'deportes');
-    articleTitles[title] = await getArticleTitle(title,'deportes');
-    //articleFirst[title] = await getArticleFirstPhrase(title,'deportes');
-  } catch (error) {
-    console.error(`Error fetching image for ${title}:`, error);
-    images[title] = 'hola.png'; // Asegúrate de tener una imagen por defecto
+async function fetchData(titles: string[], category: string) {
+  for (const title of titles.slice(1)) {
+    try {
+      if (title.slice(0, 2) == day.toString()) {
+        images[title] = await getArticleImage(title, category);
+        articleTitles[title] = await getArticleTitle(title, category);
+        articleFirst[title] = await getArticleFirstPhrase(title, category);
+        articleCategory[title] = category.toUpperCase();
+      }
+    } catch (error) {
+      console.error(`Error fetching data for ${title}:`, error);
+      images[title] = 'hola.png'; // Asegúrate de tener una imagen por defecto
+    }
   }
-  i++;
 }
----
 
+await Promise.all([
+  fetchData(titlesDeportes, 'deportes'),
+  fetchData(titlesEducacion, 'educacion'),
+  fetchData(titlesGaming, 'gaming'),
+  fetchData(titlesEntretenimiento,'entretenimiento'),
+  fetchData(titlesFinanzas,'finanzas'),
+  fetchData(titlesSalud,'salud'),
+  fetchData(titlesTecnologia,'tecnologia'),
+  fetchData(titlesViajes,'viajes'),
+  fetchData(titlesPolitica,'politica'),
+  fetchData(titlesModa,'moda'),
+  fetchData(titlesMotor,'motor'),
+  fetchData(titlesNutricion,'nutricion'),
+]);
+---
 <Layout title="Blog">
   <div class="justify-center flex-col flex p-12 px-[25rem] text-white gap-2">
     <h1 class="text-2xl"><strong>LO ÚLTIMO</strong></h1>
-    
+
     <div class="flex flex-wrap gap-5 mt-10 md:justify-start justify-center">
-      {titlesDeportes.slice(1).map((title, index) => (
-        <Portada key={index} title={articleTitles[title]} image={images[title]} cleanTitle={title} category="deportes" phrase={articleFirst[title]}></Portada>
-        <Portada key={index} title={articleTitles[title]} image={images[title]} cleanTitle={title} category="deportes" phrase={articleFirst[title]}></Portada>
-        <Portada key={index} title={articleTitles[title]} image={images[title]} cleanTitle={title} category="deportes" phrase={articleFirst[title]}></Portada>
-      ))}   
+      {Object.keys(articleTitles).slice(0,3).map((title, index) => (
+        <Portada
+          key={index}
+          title={articleTitles[title]}
+          image={images[title]}
+          cleanTitle={title}
+          category={articleCategory[title]}
+          phrase={articleFirst[title]}
+        />
+      ))}
     </div>
-    <div>
-      {titlesDeportes.slice(1).map((title, index) => (
-        <Article key={index} title={articleTitles[title]} image={images[title]} cleanTitle={title} category="deportes" phrase={articleFirst[title]}></Article>
-        <Article key={index} title={articleTitles[title]} image={images[title]} cleanTitle={title} category="deportes" phrase={articleFirst[title]}></Article>
-        <Article key={index} title={articleTitles[title]} image={images[title]} cleanTitle={title} category="deportes" phrase={articleFirst[title]}></Article>
-        ))} 
+    <div class="border-t-2 border-t-red-500 mt-10 py-5">
+      {Object.keys(articleTitles).slice(3).map((title, index) => (
+        <Article
+          key={index}
+          title={articleTitles[title]}
+          image={images[title]}
+          cleanTitle={title}
+          category={articleCategory[title]}
+          phrase={articleFirst[title]}
+        />
+      ))}
     </div>
   </div>
-</Layout>
+</Layout>;
