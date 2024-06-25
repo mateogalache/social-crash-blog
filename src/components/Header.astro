@@ -1,4 +1,49 @@
-<header class="py-8 px-4 mx-auto max-m-xl lg:py-8 lg:px-6 bg-red-500 text-white flex justify-center relative overflow-hidden">
-   
-    <a href="/"><strong class="text-lg z-10 relative">SOCIAL CRASH</strong></a>
- </header>
+<header id="main-header" class="px-4 mx-auto max-m-xl lg:px-6 text-white flex justify-center items-center flex-col relative overflow-hidden">   
+    <a href="/"><strong class="text-[200px] z-10 relative road-rage-regular font-black">SOCIAL CRASH</strong></a>
+    <nav class="flex gap-2 items-center p-2 px-5 border-2 border-red-500 rounded-3xl">
+        <a class="category bg-gray-700 p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer">Tecnología</a>
+        <a class="category bg-gray-700 p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer">Salud</a>
+        <a class="category bg-gray-700 p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer">Deportes</a>
+        <a class="category bg-gray-700 p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer">Educación</a>
+        <a class="category bg-gray-700 p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer">Política</a>
+        <a class="category bg-gray-700 p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer">Nutrición</a>
+        <a class="category bg-gray-700 p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer">Motor</a>
+        <a class="category bg-gray-700 p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer">Gaming</a>
+        <a class="category bg-gray-700 p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer">Viajes</a>
+        <a class="category bg-gray-700 p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer">Entretenimiento</a>
+        <a class="category bg-gray-700 p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer">Moda</a>
+        <a class="category bg-gray-700 p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer">Viajes</a>
+    </nav>
+</header>
+<header id="scroll-header" class="delay-[300ms] duration-[600ms] translate-y-[-200px] opacity-0 py-5 top-0 z-10 px-4 mx-auto max-m-xl w-[100%] lg:px-6 text-white flex justify-center items-center flex-col fixed overflow-hidden bg-[#13151a] bg-opacity-[.76]">
+    <div class="bg-red-700 w-[700px] p-2 border-2 border-red-500 flex relative justify-center items-center rounded-[50px]">
+        <a href="/"><strong class="text-5xl z-10 relative road-rage-regular font-black">SOCIAL CRASH</strong></a>
+        <span class="material-symbols-outlined absolute right-10 scale-150">menu</span>
+    </div>   
+</header>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const scrollHeader = document.getElementById('scroll-header');
+        let lastScrollY = window.scrollY;
+
+        if (scrollHeader) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100 && window.scrollY > lastScrollY) {
+                    scrollHeader.style.transform = 'translateY(0)';
+                    scrollHeader.style.opacity = '1';
+                } else if (window.scrollY < 100 || window.scrollY < lastScrollY) {
+                    scrollHeader.style.transform = 'translateY(-200px)';
+                    scrollHeader.style.opacity = '0';
+                }
+                lastScrollY = window.scrollY;
+            });
+        } else {
+            console.warn('Element with id "scroll-header" not found.');
+        }
+    });
+
+    </script>
+    
+    
