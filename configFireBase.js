@@ -18,22 +18,23 @@ if (!admin.apps.length) {
 
 const storage = admin.storage();
 
-const categories = [
-  "tecnologia",
-  "deportes",
-  "salud",
-  "educacion",
-  "entretenimiento",
-  "moda",
-  "motor",
-  "gaming",
-  "finanzas",
-  "nutricion",
-  "politica",
-  "viajes"
-]
+
 
 async function listArticleTitles() {
+  const categories = [
+    "tecnologia",
+    "deportes",
+    "salud",
+    "educacion",
+    "entretenimiento",
+    "moda",
+    "motor",
+    "gaming",
+    "finanzas",
+    "nutricion",
+    "politica",
+    "viajes"
+  ]
   const titles = [];
   const categories2 = [];
   for(category of categories)
