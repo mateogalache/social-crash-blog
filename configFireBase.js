@@ -19,11 +19,11 @@ if (!admin.apps.length) {
 const storage = admin.storage();
 
 async function listArticleTitles() {
-  const [files] = await storage.bucket().getFiles({ prefix: 'articulos/' });
+  const [files] = await storage.bucket().getFiles({ prefix: 'articulos/tecnologia/' });
   const titles = [];
 
   for (const file of files) {
-    const fileName = file.name.replace('articulos/', '').replace('.html', '');
+    const fileName = file.name.replace('articulos/tecnologia/', '').replace('.html', '');
     titles.push(fileName);
   }
 
