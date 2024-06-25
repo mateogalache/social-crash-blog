@@ -34,7 +34,7 @@ for (const title of titles.slice(1)) {
     
     <div class="flex flex-wrap gap-5 mt-10 md:justify-start justify-center">
       {titles.slice(1).map((title, index) => (
-        <Portada key={index} title={articleTitles[title]} image={images[title]}></Portada>
+        <Portada key={index} title={articleTitles[title]} image={images[title]} cleanTitle={title} ></Portada>
       ))}   
     </div>
   </div>
