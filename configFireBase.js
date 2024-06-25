@@ -33,13 +33,13 @@ async function listArticleTitles() {
 const titles = await listArticleTitles();
 
 async function getArticleContent(id) {
-  const file = storage.bucket().file(`articulos/${id}.html`);
+  const file = storage.bucket().file(`articulos/tecnologia/${id}.html`);
   const [content] = await file.download();
   return content.toString('utf8');
 }
 async function getArticleImage(id) {
   try {
-    const file = storage.bucket().file(`images/${id}.png`);
+    const file = storage.bucket().file(`images/tecnologia/${id}.png`);
     const [content] = await file.download();
     const base64Image = content.toString('base64');
     return `data:image/png;base64,${base64Image}`;

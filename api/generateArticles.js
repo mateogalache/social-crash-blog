@@ -8,96 +8,13 @@ const openai = new OpenAI(
     }
 );
 
-const orden = [
-    "primer",
-    "segundo",
-    "tercer",
-    "cuarto",
-    "quinto",
-    "sexto",
-    "séptimo",
-    "octavo",
-    "noveno",
-    "décimo"
-]
 
-const temas = [
-  [
-      "Inteligencia Artificial Generativa (Gen-AI)",
-      "Computación Cuántica",
-      "Energía Verde",
-      "Tecnologías Portátiles de Salud",
-      "Realidad Extendida (XR)",
-      "Tecnología Activada por Voz",
-      "Turismo Espacial",
-      "Medios Sintéticos",
-      "Robótica Avanzada",
-      "AI en Ciberseguridad",
-      "Gemelos Digitales",
-      "Tecnología Sostenible",
-      "Telemedicina",
-      "Nanotecnología",
-      "Apple Vision Pro",
-      "Baterías Térmicas",
-      "Editores de Genes",
-      "Computadoras Exascale",
-      "Auracast",
-      "Gadgets de IA",
-      "E-Ink Personalizable",
-      "Anillos Inteligentes",
-      "Auriculares Neurales",
-      "ChatGPT en Dispositivos",
-      "Sistemas Geotérmicos Mejorados",
-      "Chiplets",
-      "Tecnología para Perder Peso",
-      "Seguimiento de Variantes de COVID",
-      "Inicio de Sesión sin Contraseña",
-      "Generación de Proteínas por IA"
-  ],
-  [
-      "Vacunas Contra la Malaria",
-      "Redes 5G",
-      "Computación en el Borde",
-      "Vehículos Autónomos",
-      "Blockchain",
-      "Vehículos Eléctricos",
-      "Impresión 3D",
-      "Realidad Virtual (VR)",
-      "Realidad Aumentada (AR)",
-      "Infraestructura de Control Cuántico",
-      "Diagnósticos Médicos en Casa",
-      "Entrenadores de XR",
-      "Consultores de Salud Personalizada",
-      "Ingeniería de Hardware Neuromórfico",
-      "Pilotos Comerciales Espaciales",
-      "Productores de Medios Sintéticos",
-      "Diseñadores de Tecnología Usable",
-      "Técnicos en Energía Renovable",
-      "Analistas de Ciberseguridad",
-      "Ingenieros de Gemelos Digitales", 
-      "Especialistas en Tecnología Sostenible",
-      "Ingeniería de Computación Cuántica",
-      "Especialistas en Privacidad de Datos",
-      "Desarrolladores de Realidad Virtual",
-      "Diseñadores de Realidad Aumentada",
-      "Arquitectos de Soluciones IoT",
-      "Biólogos Genómicos",
-      "Ingenieros de Vehículos Autónomos",
-      "Desarrolladores de Blockchain",
-      "Técnicos en Computación de Borde"
-  ]
-]
-
-
-
-export async function generateArticle(orden) {
-  const date = new Date();
-  const day = date.getDate();
+export async function generateArticle(tema) {
   const response = await openai.chat.completions.create({
     model: 'gpt-3.5-turbo',
     messages: [{ 
         role: "system", 
-        content: `Haz un articulo sobre ${temas[orden][day - 1]} de más de 1000 palabras. Hazlo en formato html siguiendo las siguiente instrucciones:
+        content: `Haz un articulo sobre ${tema} de más de 1000 palabras. Hazlo en formato html siguiendo las siguiente instrucciones:
         1. Todo debe estar en este div: <div class='p-10 pb-16 flex flex-col gap-5 bg-gray-800 rounded-lg relative'>
         2. el titulo debe estar en <h1 class='text-2xl text-center'><strong>
         3. el texto normal lo pondrás en 'p' y los subitulos de los diferentes parrafos con strong.
@@ -171,9 +88,9 @@ function removeAccents(str) {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-export async function generateAndUploadContent(order) {
+export async function generateAndUploadContent(tema,carpeta) {
   // Generar artículo
-  const { articleHtml, articleTitle } = await generateArticle(order);
+  const { articleHtml, articleTitle } = await generateArticle(tema);
   const date = new Date();
   const formattedDate = formatDate(date);
   
@@ -181,13 +98,13 @@ export async function generateAndUploadContent(order) {
   const cleanTitle = removeAccents(articleTitle).replaceAll(' ', '-');
   
   // Subir artículo a Firebase Storage
-  await uploadFileToFirebaseStorage(articleHtml, `articulos/${cleanTitle}-${formattedDate}.html`, 'text/html');
+  await uploadFileToFirebaseStorage(articleHtml, `articulos/${carpeta}/${formattedDate}-${cleanTitle}.html`, 'text/html');
   
   // Generar imagen
   const imagePrompt = `Una imagen realista de ${articleTitle}`;
   const imageUrl = await generateImage(imagePrompt);
   
   // Subir imagen a Firebase Storage
-  await uploadImageFromUrlToFirebaseStorage(imageUrl, `images/${cleanTitle}-${formattedDate}.png`);
+  await uploadImageFromUrlToFirebaseStorage(imageUrl, `images/${carpeta}/${formattedDate}-${cleanTitle}.png`);
 }
 

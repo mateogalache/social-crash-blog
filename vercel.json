@@ -1,12 +1,100 @@
 {
   "crons": [
     {
-      "path": "/api/cron",
+      "path": "/api/tecnologia",
       "schedule": "0 0 * * *"
     },
     {
-      "path":"/api/name",
+      "path":"/api/tecnologia2",
       "schedule": "5 0 * * *"
+    },
+    {
+      "path":"/api/salud",
+      "schedule": "10 0 * * *"
+    },
+    {
+      "path":"/api/salud2",
+      "schedule": "15 0 * * *"
+    },
+    {
+      "path":"/api/educacion",
+      "schedule": "20 0 * * *"
+    },
+    {
+      "path":"/api/educacion2",
+      "schedule": "25 0 * * *"
+    },
+    {
+      "path":"/api/deportes",
+      "schedule": "30 0 * * *"
+    },
+    {
+      "path":"/api/deportes2",
+      "schedule": "35 0 * * *"
+    },
+    {
+      "path":"/api/gaming",
+      "schedule": "40 0 * * *"
+    },
+    {
+      "path":"/api/gaming2",
+      "schedule": "45 0 * * *"
+    },
+    {
+      "path":"/api/moda",
+      "schedule": "50 0 * * *"
+    },
+    {
+      "path":"/api/moda2",
+      "schedule": "55 0 * * *"
+    },
+    {
+      "path":"/api/politica",
+      "schedule": "0 1 * * *"
+    },
+    {
+      "path":"/api/politica2",
+      "schedule": "5 1 * * *"
+    },
+    {
+      "path":"/api/nutricion",
+      "schedule": "10 1 * * *"
+    },
+    {
+      "path":"/api/nutricion2",
+      "schedule": "15 1 * * *"
+    },
+    {
+      "path":"/api/motor",
+      "schedule": "20 1 * * *"
+    },
+    {
+      "path":"/api/motor2",
+      "schedule": "25 1 * * *"
+    },
+    {
+      "path":"/api/viajes",
+      "schedule": "30 1 * * *"
+    },
+    {
+      "path":"/api/viajes2",
+      "schedule": "35 1 * * *"
+    },
+    {
+      "path":"/api/entretenimiento",
+      "schedule": "40 1 * * *"
+    },
+    {
+      "path":"/api/entretenimiento2",
+      "schedule": "45 1 * * *"
+    },
+    {
+      "path":"/api/finanzas",
+      "schedule": "50 1 * * *"
+    },
+    {
+      "path":"/api/finanzas2",
+      "schedule": "55 1 * * *"
     }
   ],
   "functions": {
