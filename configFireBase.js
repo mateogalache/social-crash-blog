@@ -37,6 +37,16 @@ async function getArticleContent(id) {
   const [content] = await file.download();
   return content.toString('utf8');
 }
+
+
+async function getArticleTitle(id) {
+  articleContent = getArticleContent(id);
+  const titleMatch = articleContent.match(/<h1 class='text-2xl text-center'><strong>(.*?)<\/strong><\/h1>/);
+  const articleTitle = titleMatch ? titleMatch[1] : 'Título no encontrado';
+
+  return articleTitle;
+}
+
 async function getArticleImage(id) {
   try {
     const file = storage.bucket().file(`images/tecnologia/${id}.png`);
@@ -61,4 +71,4 @@ async function saveTitlesToFile() {
 
 
 
-export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,titles,getArticleImage };
+export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,titles,getArticleImage,getArticleTitle };
