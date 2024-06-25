@@ -2,10 +2,11 @@
     const {title,image,cleanTitle,category,phrase} =  Astro.props;
 ---
 
+
 <div class="flex py-5 gap-2 w-[100%] h-[15rem] border-b-red-500 border-b-2 border-opacity-[0.2]">
     <div class="w-3/5 gap-3 flex flex-col">
         <h3 class="text-3xl font-black">{title}</h3>
-        <p class="text-lg">{phrase}</p>
+        <p class="text-lg line-clamp-3 ">{phrase}...</p>
         <p class="font-black text-sm">{category}</p>
     </div>
     <div class="h-[100%] overflow-hidden w-2/5">

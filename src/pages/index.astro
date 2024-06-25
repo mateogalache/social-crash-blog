@@ -31,9 +31,10 @@ async function fetchData(titles: string[], category: string) {
   for (const title of titles.slice(1)) {
     try {
       if (title.slice(0, 2) == day.toString()) {
-        images[title] = await getArticleImage(title, category);
-        articleTitles[title] = await getArticleTitle(title, category);
-        articleFirst[title] = await getArticleFirstPhrase(title, category);
+        const newCategory = category.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        images[title] = await getArticleImage(title, newCategory);
+        articleTitles[title] = await getArticleTitle(title, newCategory);
+        articleFirst[title] = await getArticleFirstPhrase(title, newCategory);
         articleCategory[title] = category.toUpperCase();
       }
     } catch (error) {
@@ -45,17 +46,17 @@ async function fetchData(titles: string[], category: string) {
 
 await Promise.all([
   fetchData(titlesDeportes, 'deportes'),
-  fetchData(titlesEducacion, 'educacion'),
+  fetchData(titlesEducacion, 'educación'),
   fetchData(titlesGaming, 'gaming'),
   fetchData(titlesEntretenimiento,'entretenimiento'),
   fetchData(titlesFinanzas,'finanzas'),
   fetchData(titlesSalud,'salud'),
-  fetchData(titlesTecnologia,'tecnologia'),
+  fetchData(titlesTecnologia,'tecnología'),
   fetchData(titlesViajes,'viajes'),
-  fetchData(titlesPolitica,'politica'),
+  fetchData(titlesPolitica,'política'),
   fetchData(titlesModa,'moda'),
   fetchData(titlesMotor,'motor'),
-  fetchData(titlesNutricion,'nutricion'),
+  fetchData(titlesNutricion,'nutrición'),
 ]);
 ---
 <Layout title="Blog">
