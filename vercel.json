@@ -53,10 +53,6 @@
       "schedule": "0 1 * * *"
     },
     {
-      "path":"/api/politica2",
-      "schedule": "5 1 * * *"
-    },
-    {
       "path":"/api/nutricion",
       "schedule": "10 1 * * *"
     },
@@ -69,16 +65,8 @@
       "schedule": "20 1 * * *"
     },
     {
-      "path":"/api/motor2",
-      "schedule": "25 1 * * *"
-    },
-    {
       "path":"/api/viajes",
       "schedule": "30 1 * * *"
-    },
-    {
-      "path":"/api/viajes2",
-      "schedule": "35 1 * * *"
     },
     {
       "path":"/api/entretenimiento",
@@ -91,10 +79,6 @@
     {
       "path":"/api/finanzas",
       "schedule": "50 1 * * *"
-    },
-    {
-      "path":"/api/finanzas2",
-      "schedule": "55 1 * * *"
     }
   ],
   "functions": {
@@ -143,9 +127,6 @@
     "api/motor.ts": {
       "maxDuration": 60 
     },
-    "api/motor2.ts": {
-      "maxDuration": 60 
-    },
     "api/entretenimiento.ts": {
       "maxDuration": 60 
     },
@@ -155,19 +136,10 @@
     "api/viajes.ts": {
       "maxDuration": 60 
     },
-    "api/viajes2.ts": {
-      "maxDuration": 60 
-    },
     "api/finanzas.ts": {
       "maxDuration": 60 
     },
-    "api/finanzas2.ts": {
-      "maxDuration": 60 
-    },
     "api/politica.ts": {
-      "maxDuration": 60 
-    },
-    "api/politica2.ts": {
       "maxDuration": 60 
     }
   }
