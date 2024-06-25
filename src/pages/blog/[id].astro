@@ -7,7 +7,7 @@ await saveTitlesToFile();
 
 export const getStaticPaths = () => {
   return titles2.slice(1).map((title) => ({
-    params: { id: title.slice(11) },
+    params: { id: title },
   }));
 };
 
