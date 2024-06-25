@@ -8,17 +8,21 @@ interface ImageMap {
   [key: string]: string;
 }
 
+interface TitleMap {
+  [key: string]: string;
+}
+
 const titles = await listArticleTitles();
 
 const images: ImageMap = {};
-const articleTitles: ImageMap = {};
+const articleTitles: TitleMap = {}; // Initialize as an object
 for (const title of titles.slice(1)) {
   try {
     console.log(title)
     images[title] = await getArticleImage(title);
     articleTitles[title] = await getArticleTitle(title);
   } catch (error) {
-    console.error(`Error fetching image for ${titles}:`, error);
+    console.error(`Error fetching image for ${title}:`, error);
     images[title] = 'hola.png'; // Asegúrate de tener una imagen por defecto
   }
 }
