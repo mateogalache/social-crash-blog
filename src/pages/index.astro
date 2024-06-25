@@ -19,11 +19,15 @@ interface Title2Map {
 interface Title3Map {
   [key: string]: string;
 }
+interface Title4Map {
+  [key: string]: string;
+}
 
 const images: ImageMap = {};
 const articleTitles: TitleMap = {}; // Initialize as an object
 const articleFirst: Title2Map = {}; // Initialize as an object
 const articleCategory: Title3Map = {}; // Initialize as an object
+const articleCategory2: Title4Map = {}; // Initialize as an object
 const date = new Date();
 const day = date.getDate() - 1;
 
@@ -36,6 +40,7 @@ async function fetchData(titles: string[], category: string) {
         articleTitles[title] = await getArticleTitle(title, newCategory);
         articleFirst[title] = await getArticleFirstPhrase(title, newCategory);
         articleCategory[title] = category.toUpperCase();
+        articleCategory2[title] = newCategory;
       }
     } catch (error) {
       console.error(`Error fetching data for ${title}:`, error);
@@ -72,6 +77,7 @@ await Promise.all([
           cleanTitle={title}
           category={articleCategory[title]}
           phrase={articleFirst[title]}
+          newCategory={articleCategory2[title]}
         />
       ))}
     </div>
@@ -84,6 +90,7 @@ await Promise.all([
           cleanTitle={title}
           category={articleCategory[title]}
           phrase={articleFirst[title]}
+          newCategory={articleCategory2[title]}
         />
       ))}
     </div>
