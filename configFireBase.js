@@ -33,7 +33,7 @@ const categories = [
   "viajes"
 ]
 
-async function listArticleTitles($category) {
+async function listArticleTitles(category) {
   const titles = [];
   
       const [files] = await storage.bucket().getFiles({ prefix: `articulos/${category}/` });
@@ -41,13 +41,23 @@ async function listArticleTitles($category) {
       for (const file of files) {
         const fileName = file.name.replace(`articulos/${category}/`, '').replace('.html', '');
         titles.push(fileName);
-      }
-    
+      }    
 
   return titles;
 }
 
-const titlesEducacion = listArticleTitles('educacion');
+const titlesEducacion = await listArticleTitles('educacion');
+const titlesTecnologia = await listArticleTitles('tecnologia');
+const titlesViajes = await listArticleTitles('viajes');
+const titlesPolitica = await listArticleTitles('politica');
+const titlesGaming = await listArticleTitles('gaming');
+const titlesDeportes = await listArticleTitles('deportes');
+const titlesEntretenimiento = await listArticleTitles('entretenimiento');
+const titlesSalud = await listArticleTitles('salud');
+const titlesFinanzas = await listArticleTitles('finanzas');
+const titlesModa = await listArticleTitles('moda');
+const titlesMotor = await listArticleTitles('motor');
+const titlesNutricion = await listArticleTitles('nutricion');
 
 async function getArticleContent(id,category) {
   const file = storage.bucket().file(`articulos/${category}/${id}.html`);
@@ -87,5 +97,5 @@ async function saveTitlesToFile() {
 }
 
 
-export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,getArticleImage,getArticleTitle,titlesEducacion };
+export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,getArticleImage,getArticleTitle,titlesEducacion,titlesDeportes,titlesEntretenimiento,titlesFinanzas,titlesGaming,titlesModa,titlesMotor,titlesNutricion,titlesPolitica,titlesSalud,titlesTecnologia,titlesViajes };
 
