@@ -98,10 +98,76 @@
     }
   ],
   "functions": {
-    "api/cron.ts": {
+    "api/tecnologia.ts": {
       "maxDuration": 60 
     },
-    "api/name.ts": {
+    "api/tecnologia2.ts": {
+      "maxDuration": 60 
+    },
+    "api/educacion.ts": {
+      "maxDuration": 60 
+    },
+    "api/educacion2.ts": {
+      "maxDuration": 60 
+    },
+    "api/deportes.ts": {
+      "maxDuration": 60 
+    },
+    "api/deportes2.ts": {
+      "maxDuration": 60 
+    },
+    "api/salud.ts": {
+      "maxDuration": 60 
+    },
+    "api/salud2.ts": {
+      "maxDuration": 60 
+    },
+    "api/gaming.ts": {
+      "maxDuration": 60 
+    },
+    "api/gaming2.ts": {
+      "maxDuration": 60 
+    },
+    "api/moda.ts": {
+      "maxDuration": 60 
+    },
+    "api/moda2.ts": {
+      "maxDuration": 60 
+    },
+    "api/nutricion.ts": {
+      "maxDuration": 60 
+    },
+    "api/nutricion2.ts": {
+      "maxDuration": 60 
+    },
+    "api/motor.ts": {
+      "maxDuration": 60 
+    },
+    "api/motor2.ts": {
+      "maxDuration": 60 
+    },
+    "api/entretenimiento.ts": {
+      "maxDuration": 60 
+    },
+    "api/entretenimiento2.ts": {
+      "maxDuration": 60 
+    },
+    "api/viajes.ts": {
+      "maxDuration": 60 
+    },
+    "api/viajes2.ts": {
+      "maxDuration": 60 
+    },
+    "api/finanzas.ts": {
+      "maxDuration": 60 
+    },
+    "api/finanzas2.ts": {
+      "maxDuration": 60 
+    },
+    "api/politica.ts": {
+      "maxDuration": 60 
+    },
+    "api/politica2.ts": {
       "maxDuration": 60 
     }
   }
