@@ -76,7 +76,7 @@ async function uploadImageFromUrlToFirebaseStorage(imageUrl, destination) {
   await file.save(Buffer.from(buffer), {
     contentType: 'image/png',
   });
-  console.log(`Image uploaded to ${destination}`);
+  console.log(`Image uploaded to ${destination}`); 
 }
 function formatDate(date) { 
   const day = String(date.getDate()).padStart(2, '0');
