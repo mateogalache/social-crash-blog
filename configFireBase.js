@@ -18,31 +18,30 @@ if (!admin.apps.length) {
 
 const storage = admin.storage();
 
-
+const categories = [
+  "tecnologia",
+  "deportes",
+  "salud",
+  "educacion",
+  "entretenimiento",
+  "moda",
+  "motor",
+  "gaming",
+  "finanzas",
+  "nutricion",
+  "politica",
+  "viajes"
+]
 
 async function listArticleTitles() {
-  const categories = [
-    "tecnologia",
-    "deportes",
-    "salud",
-    "educacion",
-    "entretenimiento",
-    "moda",
-    "motor",
-    "gaming",
-    "finanzas",
-    "nutricion",
-    "politica",
-    "viajes"
-  ]
   const titles = [];
   const categories2 = [];
-  for(category of categories)
+  for(const category of categories)
     {
-      const [files] = await storage.bucket().getFiles({ prefix: `articulos/${cateogry}/` });
+      const [files] = await storage.bucket().getFiles({ prefix: `articulos/${category}/` });
     
       for (const file of files) {
-        const fileName = file.name.replace(`articulos/${cateogry}/`, '').replace('.html', '');
+        const fileName = file.name.replace(`articulos/${category}/`, '').replace('.html', '');
         titles.push(fileName);
         categories2.push(category);
       }
