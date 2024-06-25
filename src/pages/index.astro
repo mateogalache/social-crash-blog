@@ -12,19 +12,21 @@ interface TitleMap {
   [key: string]: string;
 }
 
-const titles = await listArticleTitles();
+const {titles,categories2} = await listArticleTitles();
 
 const images: ImageMap = {};
 const articleTitles: TitleMap = {}; // Initialize as an object
+let i = 0;
 for (const title of titles.slice(1)) {
   try {
     console.log(title)
-    images[title] = await getArticleImage(title);
-    articleTitles[title] = await getArticleTitle(title);
+    images[title] = await getArticleImage(title,categories2[i]);
+    articleTitles[title] = await getArticleTitle(title,categories2[i]);
   } catch (error) {
     console.error(`Error fetching image for ${title}:`, error);
     images[title] = 'hola.png'; // Asegúrate de tener una imagen por defecto
   }
+  i++;
 }
 ---
 
@@ -34,7 +36,7 @@ for (const title of titles.slice(1)) {
     
     <div class="flex flex-wrap gap-5 mt-10 md:justify-start justify-center">
       {titles.slice(1).map((title, index) => (
-        <Portada key={index} title={articleTitles[title]} image={images[title]} cleanTitle={title} ></Portada>
+        <Portada key={index} title={articleTitles[title]} image={images[title]} cleanTitle={title} category={categories2[index]}></Portada>
       ))}   
     </div>
   </div>

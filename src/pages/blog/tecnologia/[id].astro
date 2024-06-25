@@ -1,0 +1,28 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getArticleContent, saveTitlesToFile, titles,categories2 } from 'configFireBase';
+
+await saveTitlesToFile();
+
+export const getStaticPaths = () => {
+  return titles.slice(1).map((title) => ({
+    params: { id: title },
+  }));
+};
+
+const {id } = Astro.params;
+const articleContent = await getArticleContent(id,'tecnologia');
+
+// Usar una expresión regular non-greedy para capturar el contenido del div incluyendo el div mismo
+const match = articleContent.match(/(<div class='p-10 pb-16 flex flex-col gap-5 bg-gray-800 rounded-lg relative'>[\s\S]*?<\/div>)/);
+const newArticleContent = match ? match[0] : 'Artículo no disponible, perdona las molestias. Ponte en contacto con - para reportar el error.';
+
+// Depuración
+console.log('Match found:', newArticleContent);
+---
+
+<Layout title={id.slice(11).replaceAll('-',' ')}>
+  <div class="px-0 py-0 sm:px-60 sm:py-20">
+      <div set:html={newArticleContent}></div>
+  </div>
+</Layout>

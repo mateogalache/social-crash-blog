@@ -18,37 +18,57 @@ if (!admin.apps.length) {
 
 const storage = admin.storage();
 
+const categories = [
+  "tecnologia",
+  "deportes",
+  "salud",
+  "educacion",
+  "entretenimiento",
+  "moda",
+  "motor",
+  "gaming",
+  "finanzas",
+  "nutricion",
+  "politica",
+  "viajes"
+]
+
 async function listArticleTitles() {
-  const [files] = await storage.bucket().getFiles({ prefix: 'articulos/tecnologia/' });
   const titles = [];
+  const categories2 = [];
+  for(category of categories)
+    {
+      const [files] = await storage.bucket().getFiles({ prefix: `articulos/${cateogry}/` });
+    
+      for (const file of files) {
+        const fileName = file.name.replace(`articulos/${cateogry}/`, '').replace('.html', '');
+        titles.push(fileName);
+        categories2.push(category);
+      }
+    }
 
-  for (const file of files) {
-    const fileName = file.name.replace('articulos/tecnologia/', '').replace('.html', '');
-    titles.push(fileName);
-  }
-
-  return titles;
+  return {titles,categories2};
 }
-const titles = await listArticleTitles();
+const {titles,categories2} = await listArticleTitles();
 
-async function getArticleContent(id) {
-  const file = storage.bucket().file(`articulos/tecnologia/${id}.html`);
+async function getArticleContent(id,category) {
+  const file = storage.bucket().file(`articulos/${category}/${id}.html`);
   const [content] = await file.download();
   return content.toString('utf8');
 }
 
 
-async function getArticleTitle(id) {
-  const articleContent = await getArticleContent(id);
+async function getArticleTitle(id,category) {
+  const articleContent = await getArticleContent(id,category);
   const titleMatch = articleContent.match(/<h1 class='text-2xl text-center'><strong>(.*?)<\/strong><\/h1>/);
   const articleTitle = titleMatch ? titleMatch[1] : 'Título no encontrado';
 
   return articleTitle;
 }
 
-async function getArticleImage(id) {
+async function getArticleImage(id,category) {
   try {
-    const file = storage.bucket().file(`images/tecnologia/${id}.png`);
+    const file = storage.bucket().file(`images/${category}/${id}.png`);
     const [content] = await file.download();
     const base64Image = content.toString('base64');
     return `data:image/png;base64,${base64Image}`;
@@ -69,5 +89,5 @@ async function saveTitlesToFile() {
 }
 
 
-export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,titles,getArticleImage,getArticleTitle };
+export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,titles,getArticleImage,getArticleTitle,categories2 };
 
