@@ -58,7 +58,7 @@ async function getArticleContent(id) {
 
 
 async function getArticleTitle(id) {
-  articleContent = getArticleContent(id);
+  const articleContent = getArticleContent(id);
   const titleMatch = articleContent.match(/<h1 class='text-2xl text-center'><strong>(.*?)<\/strong><\/h1>/);
   const articleTitle = titleMatch ? titleMatch[1] : 'Título no encontrado';
 

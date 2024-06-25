@@ -85,6 +85,9 @@ function formatDate(date) {
   return `${day}-${month}-${year}`;
 }
 
+function removeAccents(str) {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 
 export async function generateAndUploadContent(tema,carpeta) {
   // Generar artículo
@@ -93,7 +96,7 @@ export async function generateAndUploadContent(tema,carpeta) {
   const formattedDate = formatDate(date);
   
   // Quitar tildes del título del artículo
-  const cleanTitle = articleTitle.replaceAll(' ', '-');
+  const cleanTitle = removeAccents(articleTitle).replaceAll(' ', '-');
   
   // Subir artículo a Firebase Storage
   await uploadFileToFirebaseStorage(articleHtml, `articulos/${carpeta}/${formattedDate}-${cleanTitle}.html`, 'text/html');
