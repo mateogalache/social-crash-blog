@@ -33,23 +33,21 @@ const categories = [
   "viajes"
 ]
 
-async function listArticleTitles() {
+async function listArticleTitles($category) {
   const titles = [];
-  const categories2 = [];
-  for(const category of categories)
-    {
+  
       const [files] = await storage.bucket().getFiles({ prefix: `articulos/${category}/` });
     
       for (const file of files) {
         const fileName = file.name.replace(`articulos/${category}/`, '').replace('.html', '');
         titles.push(fileName);
-        categories2.push(category);
       }
-    }
+    
 
-  return {titles,categories2};
+  return titles;
 }
-const {titles,categories2} = await listArticleTitles();
+
+const titlesEducacion = listArticleTitles('educacion');
 
 async function getArticleContent(id,category) {
   const file = storage.bucket().file(`articulos/${category}/${id}.html`);
@@ -89,5 +87,5 @@ async function saveTitlesToFile() {
 }
 
 
-export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,titles,getArticleImage,getArticleTitle,categories2 };
+export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,getArticleImage,getArticleTitle,titlesEducacion };
 
