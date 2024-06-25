@@ -1,6 +1,6 @@
 ---
 import Portada from '@/components/Portada.astro';
-import { listArticleTitles, getArticleImage, getArticleTitle } from '../../configFireBase';
+import { listArticleTitles, getArticleImage, getArticleTitle,titlesDeportes,titlesEducacion,titlesEntretenimiento,titlesFinanzas,titlesGaming,titlesModa,titlesMotor,titlesNutricion,titlesPolitica,titlesSalud,titlesTecnologia,titlesViajes } from '../../configFireBase';
 import Layout from '../layouts/Layout.astro';
 import articleNames from 'nameArticles.json' assert { type: 'json' };
 
@@ -12,16 +12,15 @@ interface TitleMap {
   [key: string]: string;
 }
 
-const {titles,categories2} = await listArticleTitles();
-
 const images: ImageMap = {};
 const articleTitles: TitleMap = {}; // Initialize as an object
 let i = 0;
-for (const title of titles.slice(1)) {
+
+for (const title of titlesDeportes.slice(1)) {
   try {
     console.log(title)
-    images[title] = await getArticleImage(title,categories2[i]);
-    articleTitles[title] = await getArticleTitle(title,categories2[i]);
+    images[title] = await getArticleImage(title,'deportes');
+    articleTitles[title] = await getArticleTitle(title,'deportes');
   } catch (error) {
     console.error(`Error fetching image for ${title}:`, error);
     images[title] = 'hola.png'; // Asegúrate de tener una imagen por defecto
@@ -35,8 +34,8 @@ for (const title of titles.slice(1)) {
     <h1 class="text-center text-2xl"><strong>BLOG</strong></h1>
     
     <div class="flex flex-wrap gap-5 mt-10 md:justify-start justify-center">
-      {titles.slice(1).map((title, index) => (
-        <Portada key={index} title={articleTitles[title]} image={images[title]} cleanTitle={title} category={categories2[index]}></Portada>
+      {titlesDeportes.slice(1).map((title, index) => (
+        <Portada key={index} title={articleTitles[title]} image={images[title]} cleanTitle={title} category="deportes"></Portada>
       ))}   
     </div>
   </div>
