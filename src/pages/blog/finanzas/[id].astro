@@ -1,17 +1,15 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getArticleContent, saveTitlesToFile,titlesFinanzas } from 'configFireBase';
-
-await saveTitlesToFile();
+import { getArticleContent, articlesFinanzas } from 'configFireBase';
 
 export const getStaticPaths = () => {
-  return titlesFinanzas.slice(1).map((title) => ({
-    params: { id: title },
+  return articlesFinanzas.slice(1).map((article) => ({
+    params: { id: article.title },
   }));
 };
 
 const {id } = Astro.params;
-const articleContent = await getArticleContent(id,'finanzas');
+const articleContent = await getArticleContent(id,'educacion');
 
 // Usar una expresión regular non-greedy para capturar el contenido del div incluyendo el div mismo
 const match = articleContent.match(/(<div class='p-10 pb-16 flex flex-col gap-5 bg-gray-800 rounded-lg relative'>[\s\S]*?<\/div>)/);

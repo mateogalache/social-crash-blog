@@ -1,75 +1,25 @@
 ---
 import Portada from '@/components/Portada.astro';
 import NewArticle from '@/components/NewArticle.astro';
-import { getArticleImage, getArticleTitle, getArticleFirstPhrase, titlesViajes } from '../../../../configFireBase';
+import { articlesViajes } from '../../../../configFireBase';
 import Layout from '../../../layouts/Layout.astro';
-
-interface ImageMap {
-  [key: string]: string;
-}
-
-interface TitleMap {
-  [key: string]: string;
-}
-
-interface Title2Map {
-  [key: string]: string;
-}
-
-interface Title3Map {
-  [key: string]: string;
-}
-interface Title4Map {
-  [key: string]: string;
-}
-
-const images: ImageMap = {};
-const articleTitles: TitleMap = {}; // Initialize as an object
-const articleFirst: Title2Map = {}; // Initialize as an object
-const articleCategory: Title3Map = {}; // Initialize as an object
-const articleCategory2: Title4Map = {}; // Initialize as an object
-const date = new Date();
-const day = date.getDate();
-
-async function fetchData(titles: string[], category: string) {
-  for (const title of titles.slice(1)) {
-    try {
-      
-        const newCategory = category.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        images[title] = await getArticleImage(title, newCategory);
-        articleTitles[title] = await getArticleTitle(title, newCategory);
-        articleFirst[title] = await getArticleFirstPhrase(title, newCategory);
-        articleCategory[title] = category.toUpperCase();
-        articleCategory2[title] = newCategory;
-      
-    } catch (error) {
-      console.error(`Error fetching data for ${title}:`, error);
-      images[title] = 'hola.png'; // Asegúrate de tener una imagen por defecto
-    }
-  }
-}
-
-await Promise.all([
-  fetchData(titlesViajes, 'viajes'),
-
-]);
 ---
 <Layout title="Blog">
   <div class="justify-center flex-col flex p-12 px-[15%] text-white gap-2">
-    <h1 class="text-2xl"><strong>VIAJES</strong></h1>
+    <h1 class="text-2xl"><strong>DEPORTES</strong></h1>
 
         <div class="py-5 flex flex-wrap-reverse">
-      {Object.keys(articleTitles).map((title, index) => (
-        <NewArticle
-          key={index}
-          title={articleTitles[title]}
-          image={images[title]}
-          cleanTitle={title}
-          category={articleCategory[title]}
-          phrase={articleFirst[title]}
-          newCategory={articleCategory2[title]}
-        />
-      ))}
+          {articlesViajes.map((article, index) => (
+            <NewArticle
+              key={index}
+              title={article.title}
+              image={article.image}
+              cleanTitle={article.cleanTitle}
+              category={article.category}
+              phrase={article.phrase}
+              newCategory={article.newCategory}
+            />
+          ))}
     </div>
   </div>
 </Layout>

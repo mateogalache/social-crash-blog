@@ -1,12 +1,12 @@
 import admin from 'firebase-admin';
-import fs from 'fs/promises'; 
+import fs from 'fs/promises';
 
 const serviceAccount = { 
   type: process.env.TYPE,
   project_id: process.env.PROJECT_ID,
   private_key_id: process.env.PRIVATE_KEY_ID,
   private_key: process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
-  client_email: process.env.CLIENT_EMAIL, 
+  client_email: process.env.CLIENT_EMAIL,
 };
 
 if (!admin.apps.length) { 
@@ -35,46 +35,28 @@ const categories = [
 
 async function listArticleTitles(category) {
   const titles = [];
-  
-      const [files] = await storage.bucket().getFiles({ prefix: `articulos/${category}/` });
-    
-      for (const file of files) {
-        const fileName = file.name.replace(`articulos/${category}/`, '').replace('.html', '');
-        titles.push(fileName);
-      }    
-
+  const [files] = await storage.bucket().getFiles({ prefix: `articulos/${category}/` });
+  for (const file of files) {
+    const fileName = file.name.replace(`articulos/${category}/`, '').replace('.html', '');
+    titles.push(fileName);
+  }
   return titles;
 }
 
-const titlesEducacion = await listArticleTitles('educacion');
-const titlesTecnologia = await listArticleTitles('tecnologia');
-const titlesViajes = await listArticleTitles('viajes');
-const titlesPolitica = await listArticleTitles('politica');
-const titlesGaming = await listArticleTitles('gaming');
-const titlesDeportes = await listArticleTitles('deportes');
-const titlesEntretenimiento = await listArticleTitles('entretenimiento');
-const titlesSalud = await listArticleTitles('salud');
-const titlesFinanzas = await listArticleTitles('finanzas');
-const titlesModa = await listArticleTitles('moda');
-const titlesMotor = await listArticleTitles('motor');
-const titlesNutricion = await listArticleTitles('nutricion');
-
-async function getArticleContent(id,category) {
+async function getArticleContent(id, category) {
   const file = storage.bucket().file(`articulos/${category}/${id}.html`);
   const [content] = await file.download();
   return content.toString('utf8');
 }
 
-
-async function getArticleTitle(id,category) {
-  const articleContent = await getArticleContent(id,category);
+async function getArticleTitle(id, category) {
+  const articleContent = await getArticleContent(id, category);
   const titleMatch = articleContent.match(/<h1 class='text-2xl text-center'><strong>(.*?)<\/strong><\/h1>/);
   const articleTitle = titleMatch ? titleMatch[1] : 'Título no encontrado';
-
   return articleTitle;
 }
 
-async function getArticleImage(id,category) {
+async function getArticleImage(id, category) {
   try {
     const file = storage.bucket().file(`images/${category}/${id}.png`);
     const [content] = await file.download();
@@ -82,34 +64,100 @@ async function getArticleImage(id,category) {
     return `data:image/png;base64,${base64Image}`;
   } catch (error) {
     console.error(`Error fetching image for ${id}:`, error);
-    throw error; // O maneja el error de otra manera, si prefieres
+    return 'default_image.png'; // Asegúrate de tener una imagen por defecto
   }
 }
 
-async function getArticleFirstPhrase(id,category){
-  const articleContent = await getArticleContent(id,category);
-  var match = articleContent.match(/<p>(.*?)<\/p>/);
-  var primerOracion = "Leer más";
-  if (match) {
-    // Extraemos el texto del primer grupo de captura que está entre las etiquetas <p>
-    var textoCompleto = match[1];
-    
-    // Ahora buscamos hasta el primer punto para obtener solo la primera oración
-    var primerOracion = textoCompleto.split('.')[0];
-
-  }
+async function getArticleFirstPhrase(id, category) {
+  const articleContent = await getArticleContent(id, category);
+  const match = articleContent.match(/<p>(.*?)<\/p>/);
+  const primerOracion = match ? match[1].split('.')[0] : 'Leer más';
   return primerOracion;
 }
 
-async function saveTitlesToFile() {
-  
-    const titles = await listArticleTitles();
-    const jsonContent = JSON.stringify(titles, null, 2);
-    await fs.writeFile('nameArticles.json', jsonContent);
+async function fetchData(titles, category) {
+  const articles = [];
+  const date = new Date();
+  const day = date.getDate().toString();
 
-  
+  for (const title of titles) {
+    if (title.startsWith(day)) {
+      const newCategory = category.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      try {
+        const image = await getArticleImage(title, newCategory);
+        const articleTitle = await getArticleTitle(title, newCategory);
+        const articleFirstPhrase = await getArticleFirstPhrase(title, newCategory);
+        articles.push({
+          title: articleTitle,
+          image,
+          cleanTitle: title,
+          category: category.toUpperCase(),
+          phrase: articleFirstPhrase,
+          newCategory,
+        });
+      } catch (error) {
+        console.error(`Error fetching data for ${title}:`, error);
+      }
+    }
+  }
+  return articles;
 }
 
+async function fetchData2(titles, category) {
+  const articles = [];
+  const date = new Date();
+  const day = date.getDate().toString();
 
-export { storage, admin, listArticleTitles, getArticleContent,saveTitlesToFile,getArticleImage,getArticleTitle,getArticleFirstPhrase,titlesEducacion,titlesDeportes,titlesEntretenimiento,titlesFinanzas,titlesGaming,titlesModa,titlesMotor,titlesNutricion,titlesPolitica,titlesSalud,titlesTecnologia,titlesViajes };
+  for (const title of titles) {
+      const newCategory = category.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      try {
+        const image = await getArticleImage(title, newCategory);
+        const articleTitle = await getArticleTitle(title, newCategory);
+        const articleFirstPhrase = await getArticleFirstPhrase(title, newCategory);
+        articles.push({
+          title: articleTitle,
+          image,
+          cleanTitle: title,
+          category: category.toUpperCase(),
+          phrase: articleFirstPhrase,
+          newCategory,
+        });
+      } catch (error) {
+        console.error(`Error fetching data for ${title}:`, error);
+      }
+    
+  }
+  return articles;
+}
 
+const allArticles = await Promise.all([
+  fetchData(await listArticleTitles('deportes'), 'deportes'),
+  fetchData(await listArticleTitles('educacion'), 'educacion'),
+  fetchData(await listArticleTitles('gaming'), 'gaming'),
+  fetchData(await listArticleTitles('entretenimiento'), 'entretenimiento'),
+  fetchData(await listArticleTitles('finanzas'), 'finanzas'),
+  fetchData(await listArticleTitles('salud'), 'salud'),
+  fetchData(await listArticleTitles('tecnologia'), 'tecnologia'),
+  fetchData(await listArticleTitles('viajes'), 'viajes'),
+  fetchData(await listArticleTitles('politica'), 'politica'),
+  fetchData(await listArticleTitles('moda'), 'moda'),
+  fetchData(await listArticleTitles('motor'), 'motor'),
+  fetchData(await listArticleTitles('nutricion'), 'nutricion'),
+]);
+
+const articles = allArticles.flat();
+
+const articlesDeporte = await fetchData2(await listArticleTitles('deportes'), 'deportes');
+const articlesEducacion = await fetchData2(await listArticleTitles('educacion'), 'educacion');
+const articlesEntretenimiento = await fetchData2(await listArticleTitles('entretenimiento'), 'entretenimiento');
+const articlesFinanzas = await fetchData2(await listArticleTitles('finanzas'), 'finanzas');
+const articlesGaming = await fetchData2(await listArticleTitles('gaming'), 'gaming');
+const articlesModa = await fetchData2(await listArticleTitles('moda'), 'moda');
+const articlesMotor = await fetchData2(await listArticleTitles('motor'), 'motor');
+const articlesNutricion = await fetchData2(await listArticleTitles('nutricion'), 'nutricion');
+const articlesPolitica = await fetchData2(await listArticleTitles('politica'), 'politica');
+const articlesSalud = await fetchData2(await listArticleTitles('salud'), 'salud');
+const articlesTecnologia = await fetchData2(await listArticleTitles('tecnologia'), 'tecnologia');
+const articlesViajes = await fetchData2(await listArticleTitles('viajes'), 'viajes');
+
+export { articles,articlesDeporte,getArticleContent,articlesEducacion,articlesEntretenimiento,articlesFinanzas,articlesGaming,articlesModa,articlesMotor,articlesNutricion,articlesPolitica,articlesSalud,articlesTecnologia,articlesViajes};

@@ -1,96 +1,39 @@
 ---
 import Portada from '@/components/Portada.astro';
 import Article from '@/components/Article.astro';
-import { getArticleImage, getArticleTitle, getArticleFirstPhrase, titlesDeportes, titlesEducacion, titlesEntretenimiento, titlesFinanzas, titlesGaming, titlesModa, titlesMotor, titlesNutricion, titlesPolitica, titlesSalud, titlesTecnologia, titlesViajes } from '../../configFireBase';
 import Layout from '../layouts/Layout.astro';
+import { articles} from '../../configFireBase' // Ajusta la ruta según corresponda
 
-interface ImageMap {
-  [key: string]: string;
-}
-
-interface TitleMap {
-  [key: string]: string;
-}
-
-interface Title2Map {
-  [key: string]: string;
-}
-
-interface Title3Map {
-  [key: string]: string;
-}
-interface Title4Map {
-  [key: string]: string;
-}
-
-const images: ImageMap = {};
-const articleTitles: TitleMap = {}; // Initialize as an object
-const articleFirst: Title2Map = {}; // Initialize as an object
-const articleCategory: Title3Map = {}; // Initialize as an object
-const articleCategory2: Title4Map = {}; // Initialize as an object
-const date = new Date();
-const day = date.getDate();
-
-async function fetchData(titles: string[], category: string) {
-  for (const title of titles.slice(1)) {
-    try {
-      if (title.slice(0, 2) == day.toString()) {
-        const newCategory = category.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        images[title] = await getArticleImage(title, newCategory);
-        articleTitles[title] = await getArticleTitle(title, newCategory);
-        articleFirst[title] = await getArticleFirstPhrase(title, newCategory);
-        articleCategory[title] = category.toUpperCase();
-        articleCategory2[title] = newCategory;
-      }
-    } catch (error) {
-      console.error(`Error fetching data for ${title}:`, error);
-      images[title] = 'hola.png'; // Asegúrate de tener una imagen por defecto
-    }
-  }
-}
-
-await Promise.all([
-  fetchData(titlesDeportes, 'deportes'),
-  fetchData(titlesEducacion, 'educación'),
-  fetchData(titlesGaming, 'gaming'),
-  fetchData(titlesEntretenimiento,'entretenimiento'),
-  fetchData(titlesFinanzas,'finanzas'),
-  fetchData(titlesSalud,'salud'),
-  fetchData(titlesTecnologia,'tecnología'),
-  fetchData(titlesViajes,'viajes'),
-  fetchData(titlesPolitica,'política'),
-  fetchData(titlesModa,'moda'),
-  fetchData(titlesMotor,'motor'),
-  fetchData(titlesNutricion,'nutrición'),
-]);
+const recentArticles = articles.slice(0, 3);
+const olderArticles = articles.slice(3);
 ---
 <Layout title="Blog">
   <div class="justify-center flex-col flex p-12 px-[15%] text-white gap-2">
     <h1 class="text-2xl"><strong>LO ÚLTIMO</strong></h1>
 
     <div class="flex flex-wrap gap-5 mt-10 md:justify-start justify-center">
-      {Object.keys(articleTitles).slice(0,3).map((title, index) => (
+      {recentArticles.map((article, index) => (
         <Portada
           key={index}
-          title={articleTitles[title]}
-          image={images[title]}
-          cleanTitle={title}
-          category={articleCategory[title]}
-          phrase={articleFirst[title]}
-          newCategory={articleCategory2[title]}
+          title={article.title}
+          image={article.image}
+          cleanTitle={article.cleanTitle}
+          category={article.category}
+          phrase={article.phrase}
+          newCategory={article.newCategory}
         />
       ))}
     </div>
     <div class="border-t-2 border-t-red-500 mt-10 py-5">
-      {Object.keys(articleTitles).slice(3).map((title, index) => (
+      {olderArticles.map((article, index) => (
         <Article
           key={index}
-          title={articleTitles[title]}
-          image={images[title]}
-          cleanTitle={title}
-          category={articleCategory[title]}
-          phrase={articleFirst[title]}
-          newCategory={articleCategory2[title]}
+          title={article.title}
+          image={article.image}
+          cleanTitle={article.cleanTitle}
+          category={article.category}
+          phrase={article.phrase}
+          newCategory={article.newCategory}
         />
       ))}
     </div>
