@@ -4,7 +4,7 @@ import { getArticleContent, articlesEducacion } from 'configFireBase';
 
 export const getStaticPaths = () => {
   return articlesEducacion.slice(1).map((article) => ({
-    params: { id: article.title },
+    params: { id: article.cleanTitle },
   }));
 };
 

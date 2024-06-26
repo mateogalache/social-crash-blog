@@ -4,12 +4,12 @@ import { getArticleContent, articlesFinanzas } from 'configFireBase';
 
 export const getStaticPaths = () => {
   return articlesFinanzas.slice(1).map((article) => ({
-    params: { id: article.title },
+    params: { id: article.cleanTitle },
   }));
 };
 
 const {id } = Astro.params;
-const articleContent = await getArticleContent(id,'educacion');
+const articleContent = await getArticleContent(id,'finanzas');
 
 // Usar una expresión regular non-greedy para capturar el contenido del div incluyendo el div mismo
 const match = articleContent.match(/(<div class='p-10 pb-16 flex flex-col gap-5 bg-gray-800 rounded-lg relative'>[\s\S]*?<\/div>)/);
