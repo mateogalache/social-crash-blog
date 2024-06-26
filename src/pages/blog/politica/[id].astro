@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import Portada from '@/components/Portada.astro';
 import { getArticleContent, articlesPolitica } from 'configFireBase';
 
 export const getStaticPaths = () => {
@@ -23,4 +24,20 @@ console.log('Match found:', newArticleContent);
   <div class="px-0 py-0 sm:px-60 sm:py-20">
       <div set:html={newArticleContent}></div>
   </div>
+  <div class="justify-center flex-col flex px-[13%] text-white gap-2">
+    <h1 class="text-2xl"><strong>TE PUEDE INTERESAR...</strong></h1>
+    <div class="py-5 flex flex-wrap-reverse gap-3">
+      {articlesPolitica.map((article, index) => (
+        <Portada
+          key={index}
+          title={article.title}
+          image={article.image}
+          cleanTitle={article.cleanTitle}
+          category={article.category}
+          phrase={article.phrase}
+          newCategory={article.newCategory}
+        />
+      ))}
+    </div>
+  </div> 
 </Layout>

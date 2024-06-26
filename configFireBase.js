@@ -132,32 +132,32 @@ async function fetchData2(titles, category) {
 
 const allArticles = await Promise.all([
   fetchData(await listArticleTitles('deportes'), 'deportes'),
-  fetchData(await listArticleTitles('educacion'), 'educacion'),
+  fetchData(await listArticleTitles('educacion'), 'educación'),
   fetchData(await listArticleTitles('gaming'), 'gaming'),
   fetchData(await listArticleTitles('entretenimiento'), 'entretenimiento'),
   fetchData(await listArticleTitles('finanzas'), 'finanzas'),
   fetchData(await listArticleTitles('salud'), 'salud'),
-  fetchData(await listArticleTitles('tecnologia'), 'tecnologia'),
+  fetchData(await listArticleTitles('tecnologia'), 'tecnología'),
   fetchData(await listArticleTitles('viajes'), 'viajes'),
-  fetchData(await listArticleTitles('politica'), 'politica'),
+  fetchData(await listArticleTitles('politica'), 'política'),
   fetchData(await listArticleTitles('moda'), 'moda'),
   fetchData(await listArticleTitles('motor'), 'motor'),
-  fetchData(await listArticleTitles('nutricion'), 'nutricion'),
+  fetchData(await listArticleTitles('nutricion'), 'nutrición'),
 ]);
 
 const articles = allArticles.flat();
 
 const articlesDeporte = await fetchData2(await listArticleTitles('deportes'), 'deportes');
-const articlesEducacion = await fetchData2(await listArticleTitles('educacion'), 'educacion');
+const articlesEducacion = await fetchData2(await listArticleTitles('educacion'), 'educación');
 const articlesEntretenimiento = await fetchData2(await listArticleTitles('entretenimiento'), 'entretenimiento');
 const articlesFinanzas = await fetchData2(await listArticleTitles('finanzas'), 'finanzas');
 const articlesGaming = await fetchData2(await listArticleTitles('gaming'), 'gaming');
 const articlesModa = await fetchData2(await listArticleTitles('moda'), 'moda');
 const articlesMotor = await fetchData2(await listArticleTitles('motor'), 'motor');
-const articlesNutricion = await fetchData2(await listArticleTitles('nutricion'), 'nutricion');
-const articlesPolitica = await fetchData2(await listArticleTitles('politica'), 'politica');
+const articlesNutricion = await fetchData2(await listArticleTitles('nutricion'), 'nutrición');
+const articlesPolitica = await fetchData2(await listArticleTitles('politica'), 'política');
 const articlesSalud = await fetchData2(await listArticleTitles('salud'), 'salud');
-const articlesTecnologia = await fetchData2(await listArticleTitles('tecnologia'), 'tecnologia');
+const articlesTecnologia = await fetchData2(await listArticleTitles('tecnologia'), 'tecnología');
 const articlesViajes = await fetchData2(await listArticleTitles('viajes'), 'viajes');
 
 export { articles,articlesDeporte,getArticleContent,articlesEducacion,articlesEntretenimiento,articlesFinanzas,articlesGaming,articlesModa,articlesMotor,articlesNutricion,articlesPolitica,articlesSalud,articlesTecnologia,articlesViajes};
