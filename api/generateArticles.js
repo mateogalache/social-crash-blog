@@ -64,7 +64,7 @@ async function uploadFileToFirebaseStorage(content, destination, contentType) {
 }
 
 async function generateImage(prompt) {
-  const response = await openai.images.generate({ model: "dall-e-3", prompt: prompt,size:"256x256" });
+  const response = await openai.images.generate({ model: "dall-e-3", prompt: prompt });
   const imageUrl = response.data[0].url;
   return imageUrl;
 }
