@@ -88,14 +88,17 @@ async function fetchData(titles, category) {
         const image = await getArticleImage(title, newCategory);
         const articleTitle = await getArticleTitle(title, newCategory);
         const articleFirstPhrase = await getArticleFirstPhrase(title, newCategory);
-        articles.push({
-          title: articleTitle,
-          image,
-          cleanTitle: title,
-          category: category.toUpperCase(),
-          phrase: articleFirstPhrase,
-          newCategory,
-        });
+        if (image != "default_image.png"){
+
+          articles.push({
+            title: articleTitle,
+            image,
+            cleanTitle: title,
+            category: category.toUpperCase(),
+            phrase: articleFirstPhrase,
+            newCategory,
+          });
+        }
       } catch (error) {
         console.error(`Error fetching data for ${title}:`, error);
       }
@@ -115,14 +118,16 @@ async function fetchData2(titles, category) {
         const image = await getArticleImage(title, newCategory);
         const articleTitle = await getArticleTitle(title, newCategory);
         const articleFirstPhrase = await getArticleFirstPhrase(title, newCategory);
-        articles.push({
-          title: articleTitle,
-          image,
-          cleanTitle: title,
-          category: category.toUpperCase(),
-          phrase: articleFirstPhrase,
-          newCategory,
-        });
+        if (image != "default_image.png"){
+          articles.push({
+            title: articleTitle,
+            image,
+            cleanTitle: title,
+            category: category.toUpperCase(),
+            phrase: articleFirstPhrase,
+            newCategory,
+          });
+        }
       } catch (error) {
         console.error(`Error fetching data for ${title}:`, error);
       }
