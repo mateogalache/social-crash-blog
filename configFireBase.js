@@ -78,7 +78,8 @@ async function getArticleFirstPhrase(id, category) {
 async function fetchData(titles, category) {
   const articles = [];
   const date = new Date();
-  const day = date.getDate().toString();
+  let day = date.getDate() - 1;
+  day = day.toString();
 
   for (const title of titles) {
     if (title.startsWith(day)) {
@@ -147,6 +148,23 @@ const allArticles = await Promise.all([
 
 const articles = allArticles.flat();
 
+const allArticles2 = await Promise.all([
+  fetchData2(await listArticleTitles('deportes'), 'deportes'),
+  fetchData2(await listArticleTitles('educacion'), 'educación'),
+  fetchData2(await listArticleTitles('gaming'), 'gaming'),
+  fetchData2(await listArticleTitles('entretenimiento'), 'entretenimiento'),
+  fetchData2(await listArticleTitles('finanzas'), 'finanzas'),
+  fetchData2(await listArticleTitles('salud'), 'salud'),
+  fetchData2(await listArticleTitles('tecnologia'), 'tecnología'),
+  fetchData2(await listArticleTitles('viajes'), 'viajes'),
+  fetchData2(await listArticleTitles('politica'), 'política'),
+  fetchData2(await listArticleTitles('moda'), 'moda'),
+  fetchData2(await listArticleTitles('motor'), 'motor'),
+  fetchData2(await listArticleTitles('nutricion'), 'nutrición'),
+]);
+
+const articles2 = allArticles2.flat();
+
 const articlesDeporte = await fetchData2(await listArticleTitles('deportes'), 'deportes');
 const articlesEducacion = await fetchData2(await listArticleTitles('educacion'), 'educación');
 const articlesEntretenimiento = await fetchData2(await listArticleTitles('entretenimiento'), 'entretenimiento');
@@ -160,4 +178,4 @@ const articlesSalud = await fetchData2(await listArticleTitles('salud'), 'salud'
 const articlesTecnologia = await fetchData2(await listArticleTitles('tecnologia'), 'tecnología');
 const articlesViajes = await fetchData2(await listArticleTitles('viajes'), 'viajes');
 
-export {storage, articles,articlesDeporte,getArticleContent,articlesEducacion,articlesEntretenimiento,articlesFinanzas,articlesGaming,articlesModa,articlesMotor,articlesNutricion,articlesPolitica,articlesSalud,articlesTecnologia,articlesViajes};
+export {storage, articles,articles2,articlesDeporte,getArticleContent,articlesEducacion,articlesEntretenimiento,articlesFinanzas,articlesGaming,articlesModa,articlesMotor,articlesNutricion,articlesPolitica,articlesSalud,articlesTecnologia,articlesViajes};

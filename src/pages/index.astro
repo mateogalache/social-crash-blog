@@ -1,12 +1,32 @@
 ---
 import Portada from '@/components/Portada.astro';
 import Article from '@/components/Article.astro';
+import TopArticle from '@/components/TopArticle.astro';
 import Layout from '../layouts/Layout.astro';
-import { articles } from '../../configFireBase'; // Ajusta la ruta según corresponda
+import { articles,articles2 } from '../../configFireBase'; // Ajusta la ruta según corresponda
+
+
+type ArticleType = {
+  title: string;
+  image: string;
+  cleanTitle: string;
+  category: string;
+  phrase: string;
+  newCategory: string;
+};
+
+// Seleccionar 10 artículos aleatorios de articles2
+function getRandomArticles(array: ArticleType[], count: number): ArticleType[] {
+  const shuffled = array.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
 
 const recentArticles = articles.slice(0, 3);
 const olderArticles = articles.slice(3);
+const randomArticles = getRandomArticles(articles2, 10);
+
 ---
+
 <Layout title="Blog">
   <div class="justify-center flex-col flex p-12 px-[15%] py-20 text-white gap-2">
     <h1 class="text-2xl"><strong>LO ÚLTIMO</strong></h1>
@@ -14,7 +34,7 @@ const olderArticles = articles.slice(3);
     <div id="recent-articles-container" class="flex flex-wrap gap-5 mt-10 justify-center items-center w-[100%] opacity-0 transition-opacity duration-500 ease-out">
       {recentArticles.map((article, index) => (
         <div
-          class="lg:w-[30%] recent-article transition-opacity duration-500 ease-out opacity-0 transform translate-y-10"
+          class="lg:w-[30%] recent-article transition-opacity duration-300 ease-out opacity-0 transform translate-y-10"
         >
           <Portada
             title={article.title}
@@ -30,7 +50,7 @@ const olderArticles = articles.slice(3);
     <div id="older-articles-container" class="border-t-2 border-t-red-500 mt-10 py-5 opacity-0 transition-opacity duration-500 ease-out">
       {olderArticles.map((article, index) => (
         <div
-          class="older-article transition-opacity duration-500 ease-out opacity-0 transform translate-y-10"
+          class="older-article transition-opacity duration-300 ease-out opacity-0 transform translate-y-10"
         >
           <Article
             title={article.title}
@@ -39,6 +59,26 @@ const olderArticles = articles.slice(3);
             category={article.category}
             phrase={article.phrase}
             newCategory={article.newCategory}
+          />
+        </div>
+      ))}
+    </div>
+    <h1 class="text-2xl"><strong>TENDENCIAS</strong></h1>
+
+    <div class="top flex flex-wrap gap-10 w-[100%] justify-center mt-2">
+      
+      {randomArticles.map((article, index) => (
+        <div
+          class="older-article transition-opacity duration-300 lg:w-[18%] w-[100%] ease-out opacity-0 transform translate-y-10"
+        >
+          <TopArticle
+            title={article.title}
+            image={article.image}
+            cleanTitle={article.cleanTitle}
+            category={article.category}
+            phrase={article.phrase}
+            newCategory={article.newCategory}
+            index = {index}
           />
         </div>
       ))}

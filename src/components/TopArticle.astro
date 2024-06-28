@@ -1,0 +1,19 @@
+---
+    const {title,image,cleanTitle,category,phrase,newCategory,index} =  Astro.props
+---
+
+<style>
+    .number-one {
+      font-size: 100px; /* Ajusta el tamaño según necesites */
+      color: transparent;
+      -webkit-text-stroke: 5px red; /* Bordes blancos */
+      text-stroke: 5px red; /* Bordes blancos para otros navegadores */
+    }
+</style>
+<a href={`blog/${newCategory}/${cleanTitle}`} class="flex flex-col lg:flex-row py-5 gap-2 w-[100%] bg-slate-950/[0.15] h-[8rem] p-2 transition-colors duration-300 relative items-center duration-300 hover:bg-slate-800">
+    <p class="absolute top-[-3rem] left-[-2rem] number-one opacity-40">{index+1}</p>
+    <div class="gap-3 flex flex-col">
+        <h3 class="lg:text-md text-sm font-black line-clamp-3">{title}</h3>
+        <p class="text-sm">{category}</p>
+    </div>
+</a>
