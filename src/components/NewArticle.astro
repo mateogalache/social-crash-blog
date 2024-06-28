@@ -2,15 +2,14 @@
     const {title,image,cleanTitle,category,phrase,newCategory} =  Astro.props
 ---
 
-
 <a href={`${newCategory}/${cleanTitle}`} class="flex py-5 gap-2 w-[100%] h-[15rem] border-b-red-500 border-b-2 border-opacity-[0.2]  transition-colors duration-300">
     <div class="w-3/5 gap-3 flex flex-col">
-        <h3 class="text-3xl font-black">{title}</h3>
-        <p class="text-lg line-clamp-3">{phrase}...</p>
+        <h3 class="lg:text-3xl text-lg font-black line-clamp-3">{title}</h3>
+        <p class="lg:text-lg text-sm line-clamp-3">{phrase}...</p>
         <p class="font-black text-sm">{category}</p>
         <!--<small>{cleanTitle.slice(0,5).replaceAll('-','/')}</small>-->
     </div>
-    <div class="h-[100%] overflow-hidden w-2/5">
+    <div class="h-[100%] overflow-hidden w-2/5 flex justify-center items-center">
         <img src={image} alt="" class="object-contain transition-transform duration-300 ease-in-out hover:scale-110">
     </div>
 </a>

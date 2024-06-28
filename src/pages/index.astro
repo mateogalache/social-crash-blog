@@ -2,40 +2,79 @@
 import Portada from '@/components/Portada.astro';
 import Article from '@/components/Article.astro';
 import Layout from '../layouts/Layout.astro';
-import { articles} from '../../configFireBase' // Ajusta la ruta según corresponda
+import { articles } from '../../configFireBase'; // Ajusta la ruta según corresponda
 
 const recentArticles = articles.slice(0, 3);
 const olderArticles = articles.slice(3);
 ---
 <Layout title="Blog">
-  <div class="justify-center flex-col flex p-12 px-[15%] text-white gap-2">
+  <div class="justify-center flex-col flex p-12 px-[15%] py-20 text-white gap-2">
     <h1 class="text-2xl"><strong>LO ÚLTIMO</strong></h1>
 
-    <div class="flex flex-wrap gap-5 mt-10 md:justify-start justify-center">
+    <div id="recent-articles-container" class="flex flex-wrap gap-5 mt-10 justify-center items-center w-[100%] opacity-0 transition-opacity duration-500 ease-out">
       {recentArticles.map((article, index) => (
-        <Portada
-          key={index}
-          title={article.title}
-          image={article.image}
-          cleanTitle={article.cleanTitle}
-          category={article.category}
-          phrase={article.phrase}
-          newCategory={article.newCategory}
-        />
+        <div
+          class="lg:w-[30%] recent-article transition-opacity duration-500 ease-out opacity-0 transform translate-y-10"
+        >
+          <Portada
+            title={article.title}
+            image={article.image}
+            cleanTitle={article.cleanTitle}
+            category={article.category}
+            phrase={article.phrase}
+            newCategory={article.newCategory}
+          />
+        </div>
       ))}
     </div>
-    <div class="border-t-2 border-t-red-500 mt-10 py-5">
+    <div id="older-articles-container" class="border-t-2 border-t-red-500 mt-10 py-5 opacity-0 transition-opacity duration-500 ease-out">
       {olderArticles.map((article, index) => (
-        <Article
-          key={index}
-          title={article.title}
-          image={article.image}
-          cleanTitle={article.cleanTitle}
-          category={article.category}
-          phrase={article.phrase}
-          newCategory={article.newCategory}
-        />
+        <div
+          class="older-article transition-opacity duration-500 ease-out opacity-0 transform translate-y-10"
+        >
+          <Article
+            title={article.title}
+            image={article.image}
+            cleanTitle={article.cleanTitle}
+            category={article.category}
+            phrase={article.phrase}
+            newCategory={article.newCategory}
+          />
+        </div>
       ))}
     </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const recentArticlesContainer = document.getElementById('recent-articles-container');
+      const olderArticlesContainer = document.getElementById('older-articles-container');
+      const recentArticleElements = document.querySelectorAll('.recent-article');
+      const olderArticleElements = document.querySelectorAll('.older-article');
+
+      // Aplica la transición de opacidad a los contenedores de artículos
+      requestAnimationFrame(() => {
+        recentArticlesContainer?.classList.remove('opacity-0');
+        recentArticlesContainer?.classList.add('opacity-100');
+        olderArticlesContainer?.classList.remove('opacity-0');
+        olderArticlesContainer?.classList.add('opacity-100');
+      });
+
+      // Aplica la transición a cada artículo reciente
+      recentArticleElements.forEach((article, index) => {
+        setTimeout(() => {
+          article.classList.remove('opacity-0', 'translate-y-10');
+          article.classList.add('opacity-100', 'translate-y-0');
+        }, index * 100); // Añade un retraso para escalonar las animaciones
+      });
+
+      // Aplica la transición a cada artículo antiguo
+      olderArticleElements.forEach((article, index) => {
+        setTimeout(() => {
+          article.classList.remove('opacity-0', 'translate-y-10');
+          article.classList.add('opacity-100', 'translate-y-0');
+        }, index * 100); // Añade un retraso para escalonar las animaciones
+      });
+    });
+  </script>
 </Layout>

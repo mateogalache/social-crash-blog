@@ -21,13 +21,13 @@ console.log('Match found:', newArticleContent);
 ---
 
 <Layout title={id.slice(11).replaceAll('-',' ')}>
-  <div class="px-0 py-0 sm:px-60 sm:py-20">
+  <div class="px-0 py-0 lg:px-60 py-[4.5rem]">
       <div set:html={newArticleContent}></div>
   </div>
   <div class="justify-center flex-col flex px-[13%] text-white gap-2">
     <h1 class="text-2xl"><strong>TE PUEDE INTERESAR...</strong></h1>
     <div class="py-5 flex flex-wrap-reverse gap-3">
-      {articlesGaming.map((article, index) => (
+      {articlesGaming.slice(-6).map((article, index) => (
         <Portada
           key={index}
           title={article.title}

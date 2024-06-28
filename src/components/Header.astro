@@ -6,9 +6,9 @@
 const currentPath = Astro.url.pathname;
 ---
 
-<header id="main-header" class="px-4 mx-auto max-m-xl lg:px-6 text-white flex justify-center items-center flex-col relative overflow-hidden">   
-    <a href="/"><strong class="text-[200px] z-10 relative road-rage-regular font-black">SOCIAL CRASH</strong></a>
-    <nav class="flex gap-2 items-center p-2 px-5 border-2 border-red-500 rounded-3xl">
+<header id="main-header" class="px-4 mx-auto max-m-xl lg:px-6 text-white hidden lg:flex justify-center items-center flex-col relative overflow-hidden">   
+    <a href="/" class="flex items-center justify-center"><strong class="text-[200px] z-10 relative road-rage-regular font-black flex justify-center items-center">SOCIAL CRASH</strong></a>
+    <nav class="flex flex-wrap justify-center items-center gap-2 items-center p-2 px-5 border-2 border-red-500 rounded-3xl">
         <!-- Loop through each category and check if it's the current page -->
         <a href="/blog/tecnologia" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/tecnologia') ? 'bg-red-500' : 'bg-gray-700')}>Tecnología</a>
         <a href="/blog/salud" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/salud') ? 'bg-red-500' : 'bg-gray-700')}>Salud</a>
@@ -18,18 +18,18 @@ const currentPath = Astro.url.pathname;
         <a href="/blog/nutricion" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/nutricion') ? 'bg-red-500' : 'bg-gray-700')}>Nutrición</a>
         <a href="/blog/motor" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/motor') ? 'bg-red-500' : 'bg-gray-700')}>Motor</a>
         <a href="/blog/gaming" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/gaming') ? 'bg-red-500' : 'bg-gray-700')}>Gaming</a>
-        <a href="/blog/viajes" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/viajes') ? 'bg-red-500' : 'bg-gray-700')}>Viajes</a>
+        <a href="/blog/finanzas" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/finanzas') ? 'bg-red-500' : 'bg-gray-700')}>Finanzas</a>
         <a href="/blog/entretenimiento" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/entretenimiento') ? 'bg-red-500' : 'bg-gray-700')}>Entretenimiento</a>
         <a href="/blog/moda" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/moda') ? 'bg-red-500' : 'bg-gray-700')}>Moda</a>
         <a href="/blog/viajes" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/viajes') ? 'bg-red-500' : 'bg-gray-700')}>Viajes</a>
     </nav>
 </header>
-<header id="scroll-header" class="delay-[300ms] duration-[600ms] translate-y-[-200px] opacity-0 py-5 top-0 z-10 px-4 mx-auto max-m-xl w-[100%] lg:px-6 text-white flex justify-center items-center flex-col fixed">
+<header id="scroll-header" class="delay-[300ms] duration-[600ms] translate-y-[-200px] opacity-0 py-5 top-0 z-10 w-[100%] text-white hidden lg:flex justify-center items-center flex-col fixed">
     <div class="bg-red-700 w-[700px] p-2 border-2 border-red-500 flex relative justify-center items-center rounded-[50px] z-10">
         <a href="/"><strong class="text-5xl z-10 relative road-rage-regular font-black">SOCIAL CRASH</strong></a>
         <button id="dropdownButton" class="flex items-center justify-center"><span class="material-symbols-outlined absolute right-10 scale-150 z-10">menu</span></button>
     </div>
-    <div id="dropdown" class="absolute w-[700px] p-2 pt-10 bg-gray-300 border border-red-500 rounded-bl-xl rounded-br-xl flex flex-wrap gap-2 top-[50%] z-8 transition-all duration-700 transform -translate-y-4 opacity-0">
+    <div id="dropdown" class="absolute w-[700px] p-2 pt-10 bg-gray-300 border border-red-500 rounded-bl-xl rounded-br-xl flex flex-wrap gap-2 top-[50%] z-8 transition-all duration-700 transform -translate-y-4 opacity-0 pointer-events-none visibility-hidden">
         <a href="/blog/tecnologia" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/tecnologia') ? 'bg-red-500' : 'bg-gray-700')}>Tecnología</a>
         <a href="/blog/salud" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/salud') ? 'bg-red-500' : 'bg-gray-700')}>Salud</a>
         <a href="/blog/deportes" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/deportes') ? 'bg-red-500' : 'bg-gray-700')}>Deportes</a>
@@ -38,10 +38,31 @@ const currentPath = Astro.url.pathname;
         <a href="/blog/nutricion" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/nutricion') ? 'bg-red-500' : 'bg-gray-700')}>Nutrición</a>
         <a href="/blog/motor" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/motor') ? 'bg-red-500' : 'bg-gray-700')}>Motor</a>
         <a href="/blog/gaming" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/gaming') ? 'bg-red-500' : 'bg-gray-700')}>Gaming</a>
-        <a href="/blog/viajes" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/viajes') ? 'bg-red-500' : 'bg-gray-700')}>Viajes</a>
+        <a href="/blog/finanzas" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/finanzas') ? 'bg-red-500' : 'bg-gray-700')}>Finanzas</a>
         <a href="/blog/entretenimiento" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/entretenimiento') ? 'bg-red-500' : 'bg-gray-700')}>Entretenimiento</a>
         <a href="/blog/moda" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/moda') ? 'bg-red-500' : 'bg-gray-700')}>Moda</a>
         <a href="/blog/viajes" class={"category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer " + (currentPath.includes('/blog/viajes') ? 'bg-red-500' : 'bg-gray-700')}>Viajes</a>
+    </div>
+</header>
+
+<header id="scroll-header-2" class="w-full lg:px-6 text-white lg:hidden flex justify-center items-center flex-col fixed z-10">
+    <div class="bg-red-700 w-full p-2 border-2 border-red-500 flex justify-center items-center z-10">
+        <a href="/"><strong class="text-5xl z-10 road-rage-regular font-black">SOCIAL CRASH</strong></a>
+        <button id="dropdownButton-2" class="flex items-center justify-center"><span class="material-symbols-outlined absolute right-10 scale-150 z-10">menu</span></button>
+    </div>
+    <div id="dropdown-2" class="absolute w-full p-2 pt-10 bg-[#13151a] border border-red-500 rounded-bl-xl rounded-br-xl flex flex-col justify-center items-center top-[65px] flex-wrap gap-2 py-10 z-8 transition-all duration-700 transform -translate-y-4 opacity-0 pointer-events-none visibility-hidden">
+        <a href="/blog/tecnologia" class="font-black category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer ">Tecnología</a>
+        <a href="/blog/salud" class="font-black category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer ">Salud</a>
+        <a href="/blog/deportes" class="font-black category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer ">Deportes</a>
+        <a href="/blog/educacion" class="category font-black p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer">Educación</a>
+        <a href="/blog/politica" class="category font-black p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer ">Política</a>
+        <a href="/blog/nutricion" class="category font-black p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer ">Nutrición</a>
+        <a href="/blog/motor" class="category font-black p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer ">Motor</a>
+        <a href="/blog/gaming" class="category font-black p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer ">Gaming</a>
+        <a href="/blog/finanzas" class="category font-black p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer ">Finanzas</a>
+        <a href="/blog/entretenimiento" class="category font-black p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer ">Entretenimiento</a>
+        <a href="/blog/moda" class="font-black category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer">Moda</a>
+        <a href="/blog/viajes" class="font-black category p-1 px-3 rounded-2xl hover:bg-red-500 transition-colors cursor-pointer ">Viajes</a>
     </div>
 </header>
 
@@ -70,14 +91,29 @@ const currentPath = Astro.url.pathname;
 
         dropdownButton?.addEventListener('click', () => {
             if (dropdown?.classList.contains('translate-y-0')) {
-                dropdown?.classList.remove('translate-y-0', 'opacity-100');
-                dropdown?.classList.add('-translate-y-4', 'opacity-0');
+                dropdown?.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto', 'visibility-visible');
+                dropdown?.classList.add('-translate-y-4', 'opacity-0', 'pointer-events-none', 'visibility-hidden');
             } else {
-                dropdown?.classList.remove('-translate-y-4', 'opacity-0');
-                dropdown?.classList.add('translate-y-0', 'opacity-100');
+                dropdown?.classList.remove('-translate-y-4', 'opacity-0', 'pointer-events-none', 'visibility-hidden');
+                dropdown?.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto', 'visibility-visible');
+            }
+        });
+
+        const dropdown2 = document.getElementById('dropdown-2');
+        const dropdownButton2 = document.getElementById('dropdownButton-2');
+
+        dropdownButton2?.addEventListener('click', () => {
+            if (dropdown2?.classList.contains('translate-y-0')) {
+                dropdown2?.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto', 'visibility-visible');
+                dropdown2?.classList.add('-translate-y-4', 'opacity-0', 'pointer-events-none', 'visibility-hidden');
+            } else {
+                dropdown2?.classList.remove('-translate-y-4', 'opacity-0', 'pointer-events-none', 'visibility-hidden');
+                dropdown2?.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto', 'visibility-visible');
             }
         });
     });
 </script>
+
+
 
     

@@ -2,7 +2,7 @@
     const {title,image,cleanTitle,category,newCategory} =  Astro.props
 ---
 
-<a href=`blog/${newCategory}/${cleanTitle}` class="relative flex w-[32%] flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 h-[25rem] shadow-md cursor-pointer">
+<a href=`blog/${newCategory}/${cleanTitle}` class="relative flex flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 h-[25rem] shadow-md cursor-pointer">
   <div class="relative m-0 overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border h-4/6">
     <img src={image} alt="ui/ux review check" class="transition-transform duration-300 ease-in-out hover:scale-110"/>
   </div>
