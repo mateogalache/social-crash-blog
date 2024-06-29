@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import Portada from '@/components/Portada.astro';
+import NewPortada from '@/components/NewPortada.astro';
 import {  articles2 } from 'configFireBase';
 
 type ArticleType = {
@@ -27,7 +27,7 @@ const {id,category } = Astro.params;
 for (const article of articles2)
 {
   console.log(article.date);
-  if (article.newCategory == category)
+  if (article.newCategory == category && article.cleanTitle != id)
   {
     newArticles.unshift(article);
   }
@@ -61,7 +61,7 @@ console.log('Match found:', newArticleContent);
         <div
           class="lg:w-[30%] recent-article "
         >
-          <Portada
+          <NewPortada
             title={article.title}
             image={article.image}
             cleanTitle={article.cleanTitle}
