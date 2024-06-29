@@ -78,11 +78,10 @@ async function getArticleFirstPhrase(id, category) {
 async function fetchData(titles, category) {
   const articles = [];
   const date = new Date();
-  let day = date.getDate() - 1;
+  let day = date.getDate();
   day = day.toString();
-
   for (const title of titles) {
-    if (title.startsWith(day)) {
+    if (title.slice(8,10) == day){
       const newCategory = category.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       try {
         const image = await getArticleImage(title, newCategory);
