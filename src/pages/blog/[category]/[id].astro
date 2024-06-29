@@ -16,22 +16,22 @@ type ArticleType = {
 
 const newArticles: ArticleType[] = [];
 
+
+export const getStaticPaths = () => {
+  return articles2.map((article) => ({
+    params: { id: article.cleanTitle,category:article.newCategory },
+  }));
+};
+
+const {id,category } = Astro.params;
 for (const article of articles2)
 {
   console.log(article.date);
-  if (article.newCategory == "gaming")
+  if (article.newCategory == category)
   {
     newArticles.unshift(article);
   }
 }
-
-export const getStaticPaths = () => {
-  return articles2.map((article) => ({
-    params: { id: article.cleanTitle },
-  }));
-};
-
-const {id } = Astro.params;
 let articleShow: ArticleType = articles2[0];
 for (const article of articles2)
 {
@@ -45,11 +45,8 @@ for (const article of articles2)
   console.log(articleShow.content);
 }
 
-// Usar una expresión regular non-greedy para capturar el contenido del div incluyendo el div mismo
 const match = articleShow.content.match(/(<div class='p-10 pb-16 flex flex-col gap-5 bg-gray-800 rounded-lg relative'>[\s\S]*?<\/div>)/);
 const newArticleContent = match ? match[0] : 'Artículo no disponible, perdona las molestias. Ponte en contacto con - para reportar el error.';
-
-// Depuración
 console.log('Match found:', newArticleContent);
 ---
 

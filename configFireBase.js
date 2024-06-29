@@ -1,5 +1,21 @@
 import admin from 'firebase-admin';
 
+const categories = [
+  "tecnologia",
+  "viajes",
+  "educacion",
+  "politica",
+  "nutricion",
+  "moda",
+  "motor",
+  "finanzas",
+  "salud",
+  "gaming",
+  "entretenimiento",
+  "deportes"
+];
+
+
 const serviceAccount = { 
   type: process.env.TYPE,
   project_id: process.env.PROJECT_ID,
@@ -104,4 +120,4 @@ const allArticles2 = await Promise.all([
 const articles2 = allArticles2.flat();
 
 
-export {storage,articles2};
+export {storage,articles2,categories};
