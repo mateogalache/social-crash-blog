@@ -1,16 +1,39 @@
 ---
 import Portada from '@/components/Portada.astro';
 import NewArticle from '@/components/NewArticle.astro';
-import { articlesFinanzas } from '../../../../configFireBase';
+import { articles2 } from '../../../../configFireBase';
 import Layout from '../../../layouts/Layout.astro';
+
+
+type ArticleType = {
+  title: string;
+  image: string;
+  cleanTitle: string;
+  category: string;
+  phrase: string;
+  newCategory: string;
+  date: string;
+};
+
+const newArticles: ArticleType[] = [];
+
+
+for (const article of articles2)
+{
+  console.log(article.date);
+  if (article.newCategory == "finanzas")
+  {
+    newArticles.unshift(article);
+  }
+}
 ---
 
 <Layout title="Blog">
   <div class="justify-center flex-col flex p-12 px-[15%] py-20 text-white gap-2">
     <h1 class="text-2xl font-black"><strong>FINANZAS</strong></h1>
 
-    <div id="articles-container" class="py-5 flex flex-wrap-reverse opacity-0 transition-opacity duration-500 ease-out">
-      {articlesFinanzas.map((article, index) => (
+    <div id="articles-container" class="py-5 flex flex-wrap opacity-0 transition-opacity duration-500 ease-out">
+      {newArticles.map((article, index) => (
         <div
           
           class="article transition-opacity duration-500 ease-out opacity-0 transform translate-y-10"

@@ -1,21 +1,52 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import Portada from '@/components/Portada.astro';
-import { getArticleContent, articlesDeporte } from 'configFireBase';
+import {  articles2 } from 'configFireBase';
 
+type ArticleType = {
+  title: string;
+  image: string;
+  cleanTitle: string;
+  category: string;
+  phrase: string;
+  newCategory: string;
+  date: string;
+  content: any;
+};
+
+const newArticles: ArticleType[] = [];
+
+for (const article of articles2)
+{
+  console.log(article.date);
+  if (article.newCategory == "deportes")
+  {
+    newArticles.unshift(article);
+  }
+}
 
 export const getStaticPaths = () => {
-    return articlesDeporte.slice(1).map((article) => ({
-      params: { id: article.cleanTitle },
-    }));
-  
+  return articles2.map((article) => ({
+    params: { id: article.cleanTitle },
+  }));
 };
 
 const {id } = Astro.params;
-const articleContent = await getArticleContent(id,'deportes');
+let articleShow: ArticleType = articles2[0];
+for (const article of articles2)
+{
+  console.log(id);
+  console.log(article.cleanTitle);
+  console.log(article.date);
+  if (article.cleanTitle == id)
+  {
+    articleShow = article;
+  }
+  console.log(articleShow.content);
+}
 
 // Usar una expresión regular non-greedy para capturar el contenido del div incluyendo el div mismo
-const match = articleContent.match(/(<div class='p-10 pb-16 flex flex-col gap-5 bg-gray-800 rounded-lg relative'>[\s\S]*?<\/div>)/);
+const match = articleShow.content.match(/(<div class='p-10 pb-16 flex flex-col gap-5 bg-gray-800 rounded-lg relative'>[\s\S]*?<\/div>)/);
 const newArticleContent = match ? match[0] : 'Artículo no disponible, perdona las molestias. Ponte en contacto con - para reportar el error.';
 
 // Depuración
@@ -24,21 +55,24 @@ console.log('Match found:', newArticleContent);
 
 <Layout title={id.slice(11).replaceAll('-',' ')}>
   <div class="px-0 py-0 lg:px-60 py-[4.5rem]">
-      <div class=""set:html={newArticleContent}></div>
+      <div set:html={newArticleContent}></div>
   </div>
   <div class="justify-center flex-col flex px-[13%] text-white gap-2">
     <h1 class="text-2xl"><strong>TE PUEDE INTERESAR...</strong></h1>
-    <div class="py-5 flex flex-wrap-reverse gap-3">
-      {articlesDeporte.slice(-6).map((article, index) => (
-        <Portada
-          key={index}
-          title={article.title}
-          image={article.image}
-          cleanTitle={article.cleanTitle}
-          category={article.category}
-          phrase={article.phrase}
-          newCategory={article.newCategory}
-        />
+    <div id="recent-articles-container" class="flex flex-wrap gap-5 mt-10 justify-center items-center w-[100%]">
+      {newArticles.slice(-6).map((article, index) => (
+        <div
+          class="lg:w-[30%] recent-article "
+        >
+          <Portada
+            title={article.title}
+            image={article.image}
+            cleanTitle={article.cleanTitle}
+            category={article.category}
+            phrase={article.phrase}
+            newCategory={article.newCategory}
+          />
+        </div>
       ))}
     </div>
   </div> 
