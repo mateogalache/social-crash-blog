@@ -28,6 +28,7 @@ function formatDate(date: Date) {
 for (const article of articles2)
 {
   console.log(article.date);
+  console.log(formatDate(today));
   if (article.date == formatDate(today))
   {
     newArticles.push(article);
@@ -102,6 +103,7 @@ const randomArticles = getRandomArticles(articles2, 10);
         </div>
       ))}
     </div>
+    
   </div>
 
   <script>
