@@ -76,7 +76,7 @@ async function uploadImageFromUrlToFirebaseStorage(imageUrl, destination) {
   
   // Convertir a WebP y optimizar
   const webpBuffer = await sharp(Buffer.from(buffer))
-    .webp({ quality: 40 }) // Ajusta la calidad según sea necesario
+    .webp({ quality: 25 }) // Ajusta la calidad según sea necesario
     .toBuffer();
   
   const file = storage.bucket().file(destination);
