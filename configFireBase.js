@@ -61,13 +61,15 @@ async function getArticleContent(id, category) {
 
 async function getArticleImage(id, category) {
   try {
-    const file = storage.bucket().file(`images/${category}/${id}.png`);
-    const [content] = await file.download();
-    const base64Image = content.toString('base64');
-    return `data:image/png;base64,${base64Image}`;
+    const file = storage.bucket().file(`images/${category}/${id}.webp`);
+    const [url] = await file.getSignedUrl({
+      action: 'read',
+      expires: Date.now() + 60 * 60 * 1000, // 1 hora
+    });
+    return url;
   } catch (error) {
-    console.error(`Error fetching image for ${id}:`, error);
-    return 'default_image.png'; // Asegúrate de tener una imagen por defecto
+    console.error(`Error fetching image URL for ${id}:`, error);
+    return 'default_image.webp'; // Asegúrate de tener una imagen por defecto
   }
 }
 

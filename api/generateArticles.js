@@ -1,5 +1,6 @@
 import {  OpenAI } from 'openai';
 import { storage } from '../configFireBase.js';
+import { simd } from 'sharp';
 
 
 const openai = new OpenAI(
@@ -72,12 +73,20 @@ async function generateImage(prompt) {
 async function uploadImageFromUrlToFirebaseStorage(imageUrl, destination) {
   const response = await fetch(imageUrl);
   const buffer = await response.arrayBuffer();
+  
+  // Convertir a WebP y optimizar
+  const webpBuffer = await sharp(Buffer.from(buffer))
+    .webp({ quality: 80 }) // Ajusta la calidad según sea necesario
+    .toBuffer();
+  
   const file = storage.bucket().file(destination);
-  await file.save(Buffer.from(buffer), {
-    contentType: 'image/png',
+  await file.save(webpBuffer, {
+    contentType: 'image/webp',
   });
-  console.log(`Image uploaded to ${destination}`); 
+
+  console.log(`Image uploaded to ${destination}`);
 }
+
 function formatDate(date) { 
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -106,6 +115,6 @@ export async function generateAndUploadContent(tema,carpeta) {
   const imageUrl = await generateImage(imagePrompt);
   
   // Subir imagen a Firebase Storage
-  await uploadImageFromUrlToFirebaseStorage(imageUrl, `images/${carpeta}/${formattedDate}-${cleanTitle}.png`);
+  await uploadImageFromUrlToFirebaseStorage(imageUrl, `images/${carpeta}/${formattedDate}-${cleanTitle}.webp`);
 }
 
