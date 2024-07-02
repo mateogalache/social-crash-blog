@@ -4,7 +4,7 @@ import { generateAndUploadContent } from './generateArticles.js';
 const temas = [
   "Los beneficios de una dieta baja en carbohidratos",
   "Cómo planificar comidas saludables para una semana ocupada",
-  "La importancia de los micronutrientes en la dieta diaria",
+  "Recetas saludables para cenar",
   "Alimentos que ayudan a reducir la inflamación",
   "Consejos para una dieta balanceada en una vida ocupada",
   "Los mitos más comunes sobre la pérdida de peso",
