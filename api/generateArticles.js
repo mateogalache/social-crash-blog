@@ -1,6 +1,6 @@
 import {  OpenAI } from 'openai';
 import { storage } from '../configFireBase.js';
-import { simd } from 'sharp';
+import sharp from 'sharp';
 
 
 const openai = new OpenAI(
