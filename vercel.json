@@ -115,7 +115,7 @@
     "api/moda.ts": {
       "maxDuration": 60 
     },
-    "api/moda2.ts": {
+    "api/terror.ts": {
       "maxDuration": 60 
     },
     "api/nutricion.ts": {
