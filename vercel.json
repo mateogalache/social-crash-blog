@@ -45,7 +45,7 @@
       "schedule": "50 0 * * *"
     },
     {
-      "path":"/api/moda2",
+      "path":"/api/terror",
       "schedule": "55 0 * * *"
     },
     {

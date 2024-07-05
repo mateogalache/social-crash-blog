@@ -12,7 +12,8 @@ const categories = [
   "salud",
   "gaming",
   "entretenimiento",
-  "deportes"
+  "deportes",
+  "terror"
 ];
 
 
@@ -115,6 +116,7 @@ const allArticles2 = await Promise.all([
   fetchData2(await listArticleTitles('moda'), 'moda'),
   fetchData2(await listArticleTitles('motor'), 'motor'),
   fetchData2(await listArticleTitles('nutricion'), 'nutrición'),
+  fetchData2(await listArticleTitles('terror'), 'terror'),
 ]);
 
 const articles2 = allArticles2.flat();
