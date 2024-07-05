@@ -98,6 +98,13 @@ function removeAccents(str) {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
+/*async function searchPhotos(keyword) {
+  const url = `https://api.unsplash.com/search/photos?query=${keyword}&client_id=${accessKey}`;
+
+  const response = await fetch(url);
+
+}*/
+
 export async function generateAndUploadContent(tema,carpeta) {
   // Generar artículo
   const { articleHtml, articleTitle } = await generateArticle(tema);
