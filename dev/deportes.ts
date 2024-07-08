@@ -35,7 +35,7 @@ const temas = [
   "Cómo el deporte puede fomentar la inclusión social"
 ]
 
-export default async function handler () { 
+export async function generateDeportes () { 
   const date = new Date();
   const day = date.getDate();
   try {

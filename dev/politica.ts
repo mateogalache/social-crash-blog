@@ -35,7 +35,7 @@ const temas = [
   "El papel de la justicia social en la política actual"
 ]
 
-export default async function handler () { 
+export async function generatePolitica () { 
   const date = new Date();
   const day = date.getDate();
   try {

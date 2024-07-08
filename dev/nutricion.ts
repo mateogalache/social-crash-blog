@@ -35,7 +35,7 @@ const temas = [
   "Cómo evitar los alimentos ultraprocesados"
 ]
 
-export default async function handler () { 
+export async function generateNutricion () { 
   const date = new Date();
   const day = date.getDate();
   try {

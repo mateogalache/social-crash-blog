@@ -34,7 +34,7 @@ const temas =  [
   "Las mejores colecciones de moda presentadas en 2024",
   "Cómo los influencers están cambiando la industria de la moda"
 ]
-export default async function handler () { 
+export async function generateModa () { 
   const date = new Date();
   const day = date.getDate();
   try {

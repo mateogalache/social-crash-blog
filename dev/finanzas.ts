@@ -34,7 +34,7 @@ const temas =  [
   "Las mejores estrategias para la inversión a corto plazo",
   "El papel de los asesores financieros en la gestión de patrimonio"
 ]
-export default async function handler () { 
+export async function generateFinanzas () { 
   const date = new Date();
   const day = date.getDate();
   try {

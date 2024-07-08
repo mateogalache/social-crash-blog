@@ -35,7 +35,7 @@ const temas = [
   "Cómo mantener tu coche seguro en todo momento"
 ]
 
-export default async function handler () { 
+export async function generateMotor () { 
   const date = new Date();
   const day = date.getDate();
   try {

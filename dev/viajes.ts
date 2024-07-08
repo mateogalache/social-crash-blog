@@ -35,7 +35,7 @@ const temas = [
   "Las rutas de tren más pintorescas del mundo"
 ]
 
-export default async function handler () { 
+export async function generateViajes () { 
   const date = new Date();
   const day = date.getDate();
   try {

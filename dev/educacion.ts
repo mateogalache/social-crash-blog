@@ -35,7 +35,7 @@ const temas = [
   "Cómo enseñar pensamiento crítico en la era de la información"
 ]
 
-export default async function handler () { 
+export async function generateEducacion () { 
   const date = new Date();
   const day = date.getDate();
   try {

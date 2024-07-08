@@ -35,7 +35,7 @@ const temas = [
   "Cómo los estudios de cine están adoptando la sostenibilidad"
 ]
 
-export default async function handler () { 
+export async function generateEntretenimiento () { 
   const date = new Date();
   const day = date.getDate();
   try {

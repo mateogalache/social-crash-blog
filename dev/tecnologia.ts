@@ -36,7 +36,7 @@ const temas =  [
 ];
 
 
-export default async function handler () { 
+export async function generateTecnologia () { 
   const date = new Date();
   const day = date.getDate();
   try {

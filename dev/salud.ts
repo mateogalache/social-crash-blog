@@ -34,7 +34,7 @@ const temas = [
   "Cómo mejorar tu salud ósea",
   "Los beneficios de la meditación para la salud mental"
 ]
-export default async function handler () { 
+export async function generateSalud () { 
   const date = new Date();
   const day = date.getDate();
   try {

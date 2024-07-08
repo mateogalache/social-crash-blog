@@ -34,7 +34,7 @@ const temas =  [
   "Las mejores franquicias de videojuegos de la década",
   "El futuro de los juegos de mundo abierto"
 ]
-export default async function handler () { 
+export async function generateGaming () { 
   const date = new Date();
   const day = date.getDate();
   try {
