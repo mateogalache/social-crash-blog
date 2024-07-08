@@ -10,6 +10,7 @@ import { generateSalud } from '../dev/salud.js';
 import { generateTecnologia } from '../dev/tecnologia.js';
 import { generateTerror } from '../dev/terror.js';
 import { generateViajes } from '../dev/viajes.js';
+import { generateGaming } from '../dev/gaming.js';
 
 export default async function handler () { 
   try {
@@ -25,6 +26,7 @@ export default async function handler () {
     generateViajes();
     generateSalud();
     generateTecnologia();
+    generateGaming();
     console.log('Artículo e imagen generados y subidos a Firebase Storage.');
   } catch (error) {
     console.error('Error al generar y subir el contenido:', error);

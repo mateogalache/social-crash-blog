@@ -35,7 +35,7 @@ const temas = [
   "El futuro de los deportes tradicionales"
 ]
 
-export default async function handler () { 
+export async function generateDeportes2 () { 
   const date = new Date();
   const day = date.getDate();
   try {

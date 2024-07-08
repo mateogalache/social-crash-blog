@@ -35,7 +35,7 @@ const temas = [
   "Consejos para evitar los imprevistos en tus viajes"
 ]
 
-export default async function handler () { 
+export async function generateViajes2 () { 
   const date = new Date();
   const day = date.getDate();
   try {

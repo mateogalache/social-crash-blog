@@ -35,7 +35,7 @@ const temas = [
   "Las mejores técnicas para la planificación financiera a corto plazo"
 ]
 
-export default async function handler () { 
+export async function generateFinanzas2 () { 
   const date = new Date();
   const day = date.getDate();
   try {

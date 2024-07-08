@@ -35,7 +35,7 @@ const temas =  [
   "Las mejores prácticas para la conducción en ciudad"
 ]
 
-export default async function handler () { 
+export async function generateMotor2 () { 
   const date = new Date();
   const day = date.getDate();
   try {

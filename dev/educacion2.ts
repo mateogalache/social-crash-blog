@@ -35,7 +35,7 @@ const temas = [
   "El papel de la educación en el desarrollo sostenible"
 ]
 
-export default async function handler () { 
+export async function generateEducacion2 () { 
   const date = new Date();
   const day = date.getDate();
   try {

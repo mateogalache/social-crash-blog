@@ -35,7 +35,7 @@ const temas = [
   "Las mejores técnicas para el desarrollo de juegos de aventura"
 ]
 
-export default async function handler () { 
+export async function generateGaming2 () { 
   const date = new Date();
   const day = date.getDate();
   try {

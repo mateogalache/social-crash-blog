@@ -35,7 +35,7 @@ const temas = [
   "Alimentos que ayudan a mejorar la salud del cabello"
 ]
 
-export default async function handler () { 
+export async function generateNutricion2 () { 
   const date = new Date();
   const day = date.getDate();
   try {

@@ -34,7 +34,7 @@ const temas =  [
   "Cómo encontrar el equilibrio entre moda y comodidad",
   "Las tendencias de moda más innovadoras de 2024"
 ]
-export default async function handler () { 
+export async function generateModa2 () { 
   const date = new Date();
   const day = date.getDate();
   try {

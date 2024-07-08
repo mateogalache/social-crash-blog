@@ -35,7 +35,7 @@ const temas = [
   "Cómo las políticas de medio ambiente están afectando a las empresas"
 ]
 
-export default async function handler () { 
+export async function generatePolitica2 () { 
   const date = new Date();
   const day = date.getDate();
   try {

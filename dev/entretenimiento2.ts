@@ -35,7 +35,7 @@ const temas = [
   "Cómo los eventos de eSports están ganando popularidad"
 ]
 
-export default async function handler () { 
+export async function generateEntretenimiento2 () { 
   const date = new Date();
   const day = date.getDate();
   try {

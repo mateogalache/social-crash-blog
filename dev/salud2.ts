@@ -34,7 +34,7 @@ const temas = [
   "Cómo mantener una buena salud mental en tiempos de crisis"
 ]
 
-export default async function handler () { 
+export async function generateSalud2 () { 
   const date = new Date();
   const day = date.getDate();
   try {
