@@ -19,5 +19,5 @@
     /* Allow JavaScript files */
     "allowJs": true
   },
-  "include": ["./**/*"]
+  "include": ["./**/*", "../dev"]
 }

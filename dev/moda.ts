@@ -1,4 +1,4 @@
-import { generateAndUploadContent } from './generateArticles.js';
+import { generateAndUploadContent } from '../api/generateArticles.js';
 
 
 const temas =  [
