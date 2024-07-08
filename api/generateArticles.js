@@ -105,7 +105,7 @@ function removeAccents(str) {
 
 }*/
 
-export async function generateAndUploadContent(tema,carpeta) {
+async function generateAndUploadContent(tema,carpeta) {
   // Generar artículo
   const { articleHtml, articleTitle } = await generateArticle(tema);
   const date = new Date();
@@ -124,4 +124,6 @@ export async function generateAndUploadContent(tema,carpeta) {
   // Subir imagen a Firebase Storage
   await uploadImageFromUrlToFirebaseStorage(imageUrl, `images/${carpeta}/${formattedDate}-${cleanTitle}.webp`);
 }
+
+export {generateAndUploadContent}
 
