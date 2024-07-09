@@ -111,8 +111,7 @@ function removeAccents(str) {
 
 }*/
 
-async function generateAndUploadContent(temas,categories) {
-  
+async function generateAndUploadContent(temas,categories) { 
 
   const articlePromises = temas.map(tema => generateArticle(tema));
   const articles = await Promise.all(articlePromises);

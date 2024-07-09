@@ -1,7 +1,7 @@
 import { temasDeportes } from '../dev/deportes.js';
 import { temasEducacion } from '../dev/educacion.js';
 import { temasEntretenimiento } from '../dev/entretenimiento.js';
-import { temasFinanzas } from '../dev/finanzas.js';
+import { temasNutricion } from '../dev/nutricion.js';
 import { temasGaming } from '../dev/gaming.js';
 import { generateAndUploadContent } from './generateArticles.js';
 
@@ -12,7 +12,7 @@ export default async function handler () {
     temasDeportes[day-1],
     temasEducacion[day-1],
     temasEntretenimiento[day-1],
-    temasFinanzas[day-1],
+    temasNutricion[day-1],
     temasGaming[day-1]
   ]
 
@@ -20,7 +20,7 @@ export default async function handler () {
     "deportes",
     "educacion",
     "entretenimiento",
-    "finanzas",
+    "nutricion",
     "gaming"
   ]
   try {
