@@ -20,31 +20,13 @@ export default async function handler () {
     temasDeportes[day-1],
     temasEducacion[day-1],
     temasEntretenimiento[day-1],
-    temasFinanzas[day-1],
-    temasGaming[day-1],
-    temasModa[day-1],
-    temasMotor[day-1],
-    temasNutricion[day-1],
-    temasPolitica[day-1],
-    temasSalud[day-1],
-    temasTecnologia[day-1],
-    temasTerror[day-1],
-    temasViajes[day-1]
+    
   ]
   const categories = [
     "deportes",
     "educacion",
     "entretenimiento",
-    "finanzas",
-    "gaming",
-    "moda",
-    "motor",
-    "nutricion",
-    "politica",
-    "salud",
-    "tecnologia",
-    "terror",
-    "viajes"
+
   ]
   try {
     generateAndUploadContent(newTemas,categories)
