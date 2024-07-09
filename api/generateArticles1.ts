@@ -21,12 +21,16 @@ export default async function handler () {
     temasEducacion[day-1],
     temasEntretenimiento[day-1],
     temasFinanzas[day-1],
-    temasGaming[day-1],
+    temasGaming[day-1]
+  ]
+  const newTemas2 = [  
     temasModa[day-1],
     temasMotor[day-1],
     temasNutricion[day-1],
     temasPolitica[day-1],
-    temasSalud[day-1],
+    temasSalud[day-1]
+  ]
+  const newTemas3 = [ 
     temasTecnologia[day-1],
     temasTerror[day-1],
     temasViajes[day-1]
@@ -36,18 +40,29 @@ export default async function handler () {
     "educacion",
     "entretenimiento",
     "finanzas",
-    "gaming",
+    "gaming"
+  ]
+  const categories2 = [
     "moda",
     "motor",
     "nutricion",
     "politica",
-    "salud",
+    "salud"
+  ]
+  const categories3 = [
     "tecnologia",
     "terror",
     "viajes"
   ]
+  function delay(ms:number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
   try {
-    generateAndUploadContent(newTemas,categories)
+    generateAndUploadContent(newTemas,categories);
+    await delay(90000);
+    generateAndUploadContent(newTemas2,categories2);
+    await delay(90000);
+    generateAndUploadContent(newTemas3,categories3);
     console.log('Artículo e imagen generados y subidos a Firebase Storage.');
   } catch (error) {
     console.error('Error al generar y subir el contenido:', error);
