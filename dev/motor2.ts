@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas =  [
+export const temasMotor2 =  [
   "Las mejores rutas en moto del mundo",
   "Cómo elegir el mejor coche para viajar",
   "Las innovaciones en los motores de combustión",
@@ -34,14 +31,3 @@ const temas =  [
   "Cómo elegir el mejor coche para aventuras off-road",
   "Las mejores prácticas para la conducción en ciudad"
 ]
-
-export async function generateMotor2 () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"motor");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas = [
+export const temasEducacion = [
   "Cómo integrar la educación emocional en el aula",
   "El impacto de la inteligencia artificial en la educación",
   "Las mejores prácticas para el aprendizaje colaborativo",
@@ -34,14 +31,3 @@ const temas = [
   "El futuro de las universidades en la era digital",
   "Cómo enseñar pensamiento crítico en la era de la información"
 ]
-
-export async function generateEducacion () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"educacion");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

@@ -64,12 +64,13 @@ async function uploadFileToFirebaseStorage(content, destination, contentType) {
   console.log(`File uploaded to ${destination}`);
 }
 
-async function generateImage(prompt) {
+async function generateImages(prompts) {
   try {
-    const response = await openai.images.generate({ model: "dall-e-3", prompt: prompt });
-    return response.data[0].url;
+    const promises = prompts.map(prompt => openai.images.generate({ model: "dall-e-3", prompt: `Una imagen realista de ${promp}` }));
+    const responses = await Promise.all(promises);
+    return responses.map(response => response.data[0].url);
   } catch (error) {
-    console.error('Error generating image:', error);
+    console.error('Error generating images:', error);
     throw error;
   }
 }
@@ -110,24 +111,20 @@ function removeAccents(str) {
 
 }*/
 
-async function generateAndUploadContent(tema,carpeta) {
-  // Generar artículo
-  const { articleHtml, articleTitle } = await generateArticle(tema);
-  const date = new Date();
-  const formattedDate = formatDate(date);
+async function generateAndUploadContent(temas,categories) {
   
-  // Quitar tildes del título del artículo
-  const cleanTitle = removeAccents(articleTitle).replaceAll(' ', '-');
-  
-  // Subir artículo a Firebase Storage
-  await uploadFileToFirebaseStorage(articleHtml, `articulos/${carpeta}/${formattedDate}-${cleanTitle}.html`, 'text/html');
-  
-  // Generar imagen
-  const imagePrompt = `Una imagen realista de ${articleTitle}`;
-  const imageUrl = await generateImage(imagePrompt);
-  
-  // Subir imagen a Firebase Storage
-  await uploadImageFromUrlToFirebaseStorage(imageUrl, `images/${carpeta}/${formattedDate}-${cleanTitle}.webp`);
+
+  const articlePromises = temas.map(tema => generateArticle(tema));
+  const articles = await Promise.all(articlePromises);
+  const imagesUrl = await generateImages(temas); 
+
+  articles.forEach((article,index) => {
+    const cleanTitle = removeAccents(article.articleTitle).replaceAll(' ', '-');
+    const date = new Date();
+    const formattedDate = formatDate(date);
+    uploadFileToFirebaseStorage(article.articleHtml, `articulos/${categories[index]}/${formattedDate}-${cleanTitle}.html`, 'text/html');  
+    uploadImageFromUrlToFirebaseStorage(imagesUrl[index], `images/${categories[index]}/${formattedDate}-${cleanTitle}.webp`);
+  });
 }
 
 export {generateAndUploadContent}

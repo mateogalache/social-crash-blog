@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas =  [
+export const temasFinanzas =  [
   "Cómo invertir en criptomonedas de manera segura",
   "Las mejores estrategias para el ahorro a largo plazo",
   "El impacto de la inflación en las inversiones",
@@ -34,13 +31,3 @@ const temas =  [
   "Las mejores estrategias para la inversión a corto plazo",
   "El papel de los asesores financieros en la gestión de patrimonio"
 ]
-export async function generateFinanzas () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"finanzas");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

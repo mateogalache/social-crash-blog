@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas = [
+export const temasGaming2 = [
   "Cómo los juegos están abordando el cambio climático",
   "Las mejores técnicas para el desarrollo de juegos móviles",
   "El impacto de los eventos de gaming en la comunidad",
@@ -34,14 +31,3 @@ const temas = [
   "Cómo los juegos están utilizando la tecnología blockchain",
   "Las mejores técnicas para el desarrollo de juegos de aventura"
 ]
-
-export async function generateGaming2 () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"gaming");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas = [
+export const temasNutricion = [
   "Los beneficios de una dieta baja en carbohidratos",
   "Cómo planificar comidas saludables para una semana ocupada",
   "Recetas saludables para cenar",
@@ -34,14 +31,3 @@ const temas = [
   "La importancia de la nutrición en la recuperación de enfermedades",
   "Cómo evitar los alimentos ultraprocesados"
 ]
-
-export async function generateNutricion () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"nutricion");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

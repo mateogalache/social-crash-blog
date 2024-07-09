@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas = [
+export const temasDeportes = [
   "El impacto de la inteligencia artificial en los deportes",
   "Las mejores jugadas de la Copa Mundial de la FIFA 2024",
   "Consejos para mejorar tu rendimiento en el gimnasio",
@@ -34,14 +31,3 @@ const temas = [
   "Las mejores historias de superación en el deporte",
   "Cómo el deporte puede fomentar la inclusión social"
 ]
-
-export async function generateDeportes () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"deportes");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

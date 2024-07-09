@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas = [
+export const temasEducacion2 = [
   "El papel de la educación en la igualdad de género",
   "Cómo integrar la educación ambiental en el currículo",
   "Las mejores prácticas para la educación personalizada",
@@ -34,14 +31,3 @@ const temas = [
   "Las mejores estrategias para la educación en la era digital",
   "El papel de la educación en el desarrollo sostenible"
 ]
-
-export async function generateEducacion2 () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"educacion");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

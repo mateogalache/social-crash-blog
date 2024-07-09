@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas = [
+export const temasMotor = [
   "Los coches híbridos más eficientes de 2024",
   "Cómo elegir la mejor moto para viajar",
   "Las innovaciones en los coches autónomos",
@@ -34,14 +31,3 @@ const temas = [
   "El impacto de la inteligencia artificial en la conducción",
   "Cómo mantener tu coche seguro en todo momento"
 ]
-
-export async function generateMotor () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"motor");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

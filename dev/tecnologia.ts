@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas =  [
+export const temasTecnologia =  [
   "El impacto de la inteligencia artificial en la vida cotidiana",
   "Cómo los coches autónomos están revolucionando el transporte",
   "Las últimas innovaciones en la tecnología 5G",
@@ -33,16 +30,4 @@ const temas =  [
   "El impacto de la inteligencia artificial en la creatividad",
   "Cómo la tecnología está revolucionando la industria del entretenimiento",
   "Las mejores aplicaciones para la gestión financiera personal"
-];
-
-
-export async function generateTecnologia () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"tecnologia");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}
+]

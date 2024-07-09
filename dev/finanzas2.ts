@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas = [
+export const temasFinanzas2 = [
   "Cómo utilizar las tarjetas de crédito de manera responsable",
   "Las tendencias emergentes en el mercado financiero",
   "Consejos para la planificación financiera a largo plazo",
@@ -34,14 +31,3 @@ const temas = [
   "El impacto de la sostenibilidad en las inversiones",
   "Las mejores técnicas para la planificación financiera a corto plazo"
 ]
-
-export async function generateFinanzas2 () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"finanzas");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

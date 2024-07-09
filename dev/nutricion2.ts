@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas = [
+export const temasNutricion2 = [
   "Alimentos que mejoran la salud ocular",
   "Cómo hacer una desintoxicación de azúcar",
   "El papel de los superalimentos en la dieta moderna",
@@ -34,14 +31,3 @@ const temas = [
   "Cómo planificar comidas saludables para personas mayores",
   "Alimentos que ayudan a mejorar la salud del cabello"
 ]
-
-export async function generateNutricion2 () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"nutricion");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

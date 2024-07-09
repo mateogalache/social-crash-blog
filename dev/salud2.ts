@@ -1,6 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-const temas = [
+export const temasSalud2 = [
   "Cómo mantener un peso saludable",
   "La importancia de la actividad física regular",
   "Cómo evitar el sedentarismo en el trabajo",
@@ -33,14 +31,3 @@ const temas = [
   "La relación entre la salud mental y la calidad del sueño",
   "Cómo mantener una buena salud mental en tiempos de crisis"
 ]
-
-export async function generateSalud2 () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"salud");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

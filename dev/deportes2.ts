@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas = [
+export const temasDeportes2 = [
   "El papel de los fisioterapeutas en el deporte profesional",
   "Las innovaciones en el equipamiento deportivo",
   "Cómo elegir la bicicleta perfecta para ti",
@@ -34,14 +31,3 @@ const temas = [
   "Cómo los deportes pueden mejorar la vida de los jóvenes",
   "El futuro de los deportes tradicionales"
 ]
-
-export async function generateDeportes2 () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"deportes");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

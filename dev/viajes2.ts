@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas = [
+export const temasViajes2 = [
   "Cómo planificar un viaje alrededor del mundo",
   "Los mejores destinos para los amantes del vino",
   "Consejos para viajar durante la temporada alta",
@@ -34,14 +31,3 @@ const temas = [
   "Las mejores rutas de viaje en autocaravana",
   "Consejos para evitar los imprevistos en tus viajes"
 ]
-
-export async function generateViajes2 () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"viajes");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

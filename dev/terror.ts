@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas = [
+export const temasTerror = [
   "Las películas de terror más esperadas de 2024",
     "Cómo el terror psicológico está evolucionando en el cine",
     "Los mejores libros de terror que debes leer este año",
@@ -34,15 +31,3 @@ const temas = [
     "El papel de la iluminación en las películas de terror",
     "Los mejores remakes de películas de terror clásicas"
 ]
-
-
-export async function generateTerror () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"terror");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

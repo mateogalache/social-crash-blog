@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas =  [
+export const temasModa2 =  [
   "Las tendencias de calzado para este año",
   "Cómo mantener la ropa en buen estado por más tiempo",
   "Las mejores prendas básicas que no pueden faltar en tu armario",
@@ -34,13 +31,3 @@ const temas =  [
   "Cómo encontrar el equilibrio entre moda y comodidad",
   "Las tendencias de moda más innovadoras de 2024"
 ]
-export async function generateModa2 () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"moda");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

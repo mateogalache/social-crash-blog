@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas = [
+export const temasEntretenimiento = [
   "Las series de televisión más esperadas de 2024",
   "Cómo los servicios de streaming están cambiando la televisión",
   "Las mejores películas de acción del año",
@@ -34,14 +31,3 @@ const temas = [
   "Las películas biográficas más esperadas de este año",
   "Cómo los estudios de cine están adoptando la sostenibilidad"
 ]
-
-export async function generateEntretenimiento () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"entretenimiento");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

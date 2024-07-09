@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas =  [
+export const temasGaming =  [
   "Los videojuegos más esperados del otoño 2024",
   "Cómo mejorar tus habilidades en juegos de estrategia",
   "Las mejores consolas de juegos del año",
@@ -34,13 +31,3 @@ const temas =  [
   "Las mejores franquicias de videojuegos de la década",
   "El futuro de los juegos de mundo abierto"
 ]
-export async function generateGaming () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"gaming");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

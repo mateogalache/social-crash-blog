@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas =  [
+export const temasModa =  [
   "Las tendencias de moda para el otoño 2024",
   "Cómo combinar colores de manera efectiva",
   "El regreso de los estilos de los 80",
@@ -34,13 +31,3 @@ const temas =  [
   "Las mejores colecciones de moda presentadas en 2024",
   "Cómo los influencers están cambiando la industria de la moda"
 ]
-export async function generateModa () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"moda");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}

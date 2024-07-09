@@ -1,7 +1,4 @@
-import { generateAndUploadContent } from '../api/generateArticles.js';
-
-
-const temas = [
+export const temasPolitica2 = [
   "Cómo las políticas agrícolas están afectando la producción de alimentos",
   "El impacto de las políticas de defensa en la seguridad global",
   "Las relaciones diplomáticas entre Estados Unidos y Rusia",
@@ -34,14 +31,3 @@ const temas = [
   "El papel de la equidad en la política moderna",
   "Cómo las políticas de medio ambiente están afectando a las empresas"
 ]
-
-export async function generatePolitica2 () { 
-  const date = new Date();
-  const day = date.getDate();
-  try {
-    await generateAndUploadContent(temas[day - 1],"politica");
-    console.log('Artículo e imagen generados y subidos a Firebase Storage.');
-  } catch (error) {
-    console.error('Error al generar y subir el contenido:', error);
-  }
-}
