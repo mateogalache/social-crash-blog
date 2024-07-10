@@ -4,6 +4,9 @@ import { temasMotor } from '../dev/motor.js';
 import { temasPolitica } from '../dev/politica.js';
 import { temasSalud } from '../dev/salud.js';
 import { generateAndUploadContent } from './generateArticles.js';
+import { temasNutricion } from '../dev/nutricion.js';
+import { temasTecnologia } from '../dev/tecnologia.js';
+import { temasTerror } from '../dev/terror.js';
 
 export default async function handler () { 
   const date = new Date();
@@ -26,11 +29,11 @@ export default async function handler () {
     "salud",
   ]
   const newTemas3 = [  
-    temasModa[day-1],
-    temasMotor[day-1],
-    temasViajes[day-1],
+    temasTerror[day-1],
+    temasNutricion[day-1],
+    temasSalud[day-1],
     temasPolitica[day-1],
-    temasSalud[day-1]
+    temasTecnologia[day-1]
   ]
   const categories3 = [
     "terror",
