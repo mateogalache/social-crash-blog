@@ -66,7 +66,7 @@ async function uploadFileToFirebaseStorage(content, destination, contentType) {
 
 async function generateImages(prompts) {
   try {
-    const promises = prompts.map(prompt => openai.images.generate({ model: "dall-e-2", prompt: `Una imagen realista de ${prompt}` }));
+    const promises = prompts.map(prompt => openai.images.generate({ model: "dall-e-3", prompt: `Una imagen realista de ${prompt}` }));
     const responses = await Promise.all(promises);
     return responses.map(response => response.data[0].url);
   } catch (error) {
