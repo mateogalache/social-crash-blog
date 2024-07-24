@@ -52,11 +52,29 @@ async function getArticleContent(id, category) {
   const titleMatch = finalContent.match(/<h1 class='text-2xl text-center'><strong>(.*?)<\/strong><\/h1>/);
   const articleTitle = titleMatch ? titleMatch[1] : 'Título no encontrado';
 
-  const match = finalContent.match(/<p>(.*?)<\/p>/);
-  const articleFirstPhrase = match ? match[1].split('.')[0] : 'Leer más';
+  // Regex to match paragraphs
+  const paragraphs = finalContent.match(/<p>(.*?)<\/p>/g) || [];
+  let articleFirstPhrase = 'Leer más';
 
-  return {finalContent,articleTitle,articleFirstPhrase};
+  for (const paragraph of paragraphs) {
+    // Extract content inside <p>
+    const paragraphContent = paragraph.match(/<p>(.*?)<\/p>/)[1];
+
+    // Check if the entire content is within a single <strong> tag
+    if (/^<strong>.*<\/strong>$/.test(paragraphContent)) {
+      continue; // Skip this paragraph
+    } else {
+      // Remove <strong> tags if they are part of the content but not the whole content
+      const cleanedContent = paragraphContent.replace(/<strong>|<\/strong>/g, '');
+      articleFirstPhrase = cleanedContent.split('.')[0];
+      break;
+    }
+  }
+
+  return {finalContent, articleTitle, articleFirstPhrase};
 }
+
+
 
 
 
