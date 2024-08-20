@@ -127,55 +127,73 @@ console.log('Match found:', newArticleContent);
 <script>
   let defaultTransform = 0;
   const slider = document.getElementById("slider");
-  const maxTransform = -(slider.scrollWidth - slider.clientWidth);
-  
-  function goNext() {
+  const next = document.getElementById("next");
+  const prev = document.getElementById("prev");
+
+  if (slider) {
+    const maxTransform = -(slider.scrollWidth - slider.clientWidth);
+
+    function goNext() {
       defaultTransform = defaultTransform - 398;
       if (defaultTransform < maxTransform) {
-          defaultTransform = maxTransform;
+        defaultTransform = maxTransform;
       }
-      slider.style.transform = "translateX(" + defaultTransform + "px)";
-  }
+      if(slider)
+      {
 
-  function goPrev() {
+        slider.style.transform = "translateX(" + defaultTransform + "px)";
+      }
+    }
+
+    function goPrev() {
       if (defaultTransform === 0) {
-          return; // No retroceder si ya estamos en el inicio
+        return; // No retroceder si ya estamos en el inicio
       }
       defaultTransform = defaultTransform + 398;
-      slider.style.transform = "translateX(" + defaultTransform + "px)";
-  }
+      if(slider){
+        slider.style.transform = "translateX(" + defaultTransform + "px)";
 
-  next.addEventListener("click", goNext);
-  prev.addEventListener("click", goPrev);
+      }
+    }
 
-  // Funcionalidad de deslizamiento en dispositivos móviles
-  let startX = 0;
-  let isDragging = false;
+    if (next) {
+      next.addEventListener("click", goNext);
+    }
 
-  slider.addEventListener("touchstart", (e) => {
+    if (prev) {
+      prev.addEventListener("click", goPrev);
+    }
+
+    // Funcionalidad de deslizamiento en dispositivos móviles
+    let startX = 0;
+    let isDragging = false;
+
+    slider.addEventListener("touchstart", (e) => {
       startX = e.touches[0].clientX;
       isDragging = true;
-  });
+    });
 
-  slider.addEventListener("touchmove", (e) => {
+    slider.addEventListener("touchmove", (e) => {
       if (!isDragging) return;
       const currentX = e.touches[0].clientX;
       const diffX = currentX - startX;
 
       // Desliza el slider en función del movimiento
       if (diffX > 0) {
-          goPrev();
+        goPrev();
       } else if (diffX < 0) {
-          goNext();
+        goNext();
       }
 
       isDragging = false;
-  });
+    });
 
-  slider.addEventListener("touchend", () => {
+    slider.addEventListener("touchend", () => {
       isDragging = false;
-  });
+    });
+  }
 </script>
+
 
 
 
