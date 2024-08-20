@@ -2,14 +2,13 @@
     const {title,image,cleanTitle,category,newCategory} =  Astro.props
 ---
 
-<a href=`${cleanTitle}` class="relative flex flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 h-[25rem]  shadow-md cursor-pointer">
+<a href=`${cleanTitle}` class="relative flex flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 h-[20rem] w-[15rem] shadow-md cursor-pointer">
   <div class="relative m-0 overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border h-4/6">
     <img src={image} alt="ui/ux review check" class="transition-transform duration-300 ease-in-out hover:scale-110"/>
   </div>
   <div class="p-6">
-    <h4 class="block font-black text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+    <h4 class="block font-black text-md antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
       <strong>{title.replaceAll('-', ' ')}</strong>
     </h4>       
   </div>
-  <p class="absolute right-2 top-2 font-black text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{category}</p>   
 </a>

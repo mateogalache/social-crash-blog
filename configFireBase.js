@@ -52,10 +52,25 @@ async function getArticleContent(id, category) {
   const titleMatch = finalContent.match(/<h1 class='text-2xl text-center'><strong>(.*?)<\/strong><\/h1>/);
   const articleTitle = titleMatch ? titleMatch[1] : 'Título no encontrado';
 
-  const match = finalContent.match(/<p>(.*?)<\/p>/);
-  const articleFirstPhrase = match ? match[1].split('.')[0] : 'Leer más';
+  const paragraphs = finalContent.match(/<p>(.*?)<\/p>/g) || [];
+  let articleFirstPhrase = 'Leer más';
 
-  return {finalContent,articleTitle,articleFirstPhrase};
+  for (const paragraph of paragraphs) {
+    // Extract content inside <p>
+    const paragraphContent = paragraph.match(/<p>(.*?)<\/p>/)[1];
+
+    // Check if the entire content is within a single <strong> tag
+    if (/^<strong>.*<\/strong>$/.test(paragraphContent)) {
+      continue; // Skip this paragraph
+    } else {
+      // Remove <strong> tags if they are part of the content but not the whole content
+      const cleanedContent = paragraphContent.replace(/<strong>|<\/strong>/g, '');
+      articleFirstPhrase = cleanedContent.split('.')[0];
+      break;
+    }
+  }
+
+  return {finalContent, articleTitle, articleFirstPhrase};
 }
 
 
@@ -69,6 +84,30 @@ async function getArticleImage(id, category) {
   } catch (error) {
     console.error(`Error fetching image for ${id}:`, error);
     return 'default_image.png'; // Asegúrate de tener una imagen por defecto
+  }
+}
+
+async function getAllImages(category) {
+  try {
+    const [files] = await storage.bucket().getFiles({
+      prefix: `productos/imagenes/${category}/`,
+    });
+
+    const images = [];
+
+    for (const file of files) {
+      const [content] = await file.download();
+      const base64Image = content.toString('base64');
+      images.push({
+        filename: file.name,
+        base64: `data:image/jpeg;base64,${base64Image}`,
+      });
+    }
+
+    return images;
+  } catch (error) {
+    console.error('Error fetching images:', error);
+    return [];
   }
 }
 
@@ -121,5 +160,25 @@ const allArticles2 = await Promise.all([
 
 const articles2 = allArticles2.flat();
 
+const allImages = await Promise.all([
+  getAllImages('deportes'),
+  getAllImages('educacion'),
+  getAllImages('gaming'),
+  getAllImages('entretenimiento'),
+  getAllImages('finanzas'),
+  getAllImages('salud'),
+  getAllImages('tecnologia'),
+  getAllImages('viajes'),
+  getAllImages('politica'),
+  getAllImages('moda'),
+  getAllImages('motor'),
+  getAllImages('nutricion'),
+  getAllImages('terror')
+]);
 
-export {storage,articles2,categories};
+const allImages2 = allImages.flat();
+
+
+
+
+export {storage,articles2,categories,allImages2};

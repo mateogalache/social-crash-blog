@@ -1,7 +1,8 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import NewPortada from '@/components/NewPortada.astro';
-import {  articles2 } from 'configFireBase';
+import NewPortada2 from '@/components/NewPortada2.astro';
+import {  articles2,allImages2 } from 'configFireBase';
 
 type ArticleType = {
   title: string;
@@ -24,6 +25,21 @@ export const getStaticPaths = () => {
 };
 
 const {id,category } = Astro.params;
+interface Product {
+  filename: string;
+  base64: string;
+}
+
+const imagesCategory: Product[] = [];
+
+for (const image of allImages2)
+{
+  if(image.filename.split('/')[2] == category)
+  {
+    imagesCategory.unshift(image);
+  }
+}
+
 for (const article of articles2)
 {
   console.log(article.date);
@@ -55,6 +71,39 @@ console.log('Match found:', newArticleContent);
       <div set:html={newArticleContent}></div>
   </div>
   <div class="justify-center flex-col flex px-[13%] text-white gap-2">
+    <h1 class="text-2xl"><strong>PRODUCTOS DE {category.toUpperCase()}</strong></h1>
+    <div class="flex items-center justify-center w-full h-full py-24 sm:py-8 px-4">
+      <div class="w-full relative flex items-center justify-center">
+          <button aria-label="slide backward" class="absolute z-30 left-[-4rem] ml-10 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer bg-white bg-opacity-60 hover:bg-opacity-80 p-4 rounded-full" id="prev">
+              <svg class="dark:text-gray-900" width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+          </button>
+          <div class="w-full h-full mx-auto overflow-x-hidden overflow-y-hidden">
+              <div id="slider" class="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700">
+                {imagesCategory.slice(0,-1).map((image,index) => (
+                  <div
+                    class="recent-article "
+                  >
+                    <NewPortada2
+                      title={image.filename.split('_')[0].split('/')[3].charAt(0).toUpperCase() + image.filename.split('_')[0].split('/')[3].slice(1)}
+                      image={image.base64}
+                      cleanTitle={'https://amzn.to/' + image.filename.slice(0,-4).split('_')[1]}
+                      category={category.toUpperCase()}
+                      phrase={image.filename}
+                      newCategory={image.filename}
+                    />
+                  </div>
+                ))}
+              </div>
+          </div>
+          <button aria-label="slide forward" class="absolute z-30 right-[-4rem] mr-10 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 bg-white bg-opacity-60 hover:bg-opacity-80 p-4 rounded-full" id="next">
+              <svg class="dark:text-gray-900" width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L7 7L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+          </button>
+      </div>
+    </div>
     <h1 class="text-2xl"><strong>TE PUEDE INTERESAR...</strong></h1>
     <div id="recent-articles-container" class="flex flex-wrap gap-5 mt-10 justify-center items-center w-[100%]">
       {newArticles.slice(-6).map((article, index) => (
@@ -74,3 +123,64 @@ console.log('Match found:', newArticleContent);
     </div>
   </div> 
 </Layout>
+
+<script>
+  let defaultTransform = 0;
+  const slider = document.getElementById("slider");
+  const maxTransform = -(slider.scrollWidth - slider.clientWidth);
+  
+  function goNext() {
+      defaultTransform = defaultTransform - 398;
+      if (defaultTransform < maxTransform) {
+          defaultTransform = maxTransform;
+      }
+      slider.style.transform = "translateX(" + defaultTransform + "px)";
+  }
+
+  function goPrev() {
+      if (defaultTransform === 0) {
+          return; // No retroceder si ya estamos en el inicio
+      }
+      defaultTransform = defaultTransform + 398;
+      slider.style.transform = "translateX(" + defaultTransform + "px)";
+  }
+
+  next.addEventListener("click", goNext);
+  prev.addEventListener("click", goPrev);
+
+  // Funcionalidad de deslizamiento en dispositivos móviles
+  let startX = 0;
+  let isDragging = false;
+
+  slider.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+  });
+
+  slider.addEventListener("touchmove", (e) => {
+      if (!isDragging) return;
+      const currentX = e.touches[0].clientX;
+      const diffX = currentX - startX;
+
+      // Desliza el slider en función del movimiento
+      if (diffX > 0) {
+          goPrev();
+      } else if (diffX < 0) {
+          goNext();
+      }
+
+      isDragging = false;
+  });
+
+  slider.addEventListener("touchend", () => {
+      isDragging = false;
+  });
+</script>
+
+
+
+
+
+
+
+
