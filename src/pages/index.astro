@@ -26,15 +26,17 @@ function formatDate(date: Date) {
   return `${year}-${month}-${day}`;
 }
 
-for (const article of articles2)
-{
-  console.log(article.date);
-  console.log(formatDate(today));
-  if (article.date == formatDate(today))
-  {
+// Mezclar (shuffle) el array de artículos
+const shuffledArticlesList = articles2.sort(() => Math.random() - 0.5);
+
+// Seleccionar los primeros 10 artículos
+const selectedArticles = shuffledArticlesList.slice(0, 10);
+
+// Agregar los 10 artículos aleatorios a newArticles
+for (const article of selectedArticles) {
     newArticles.push(article);
-  }
 }
+
 
 // Seleccionar 10 artículos aleatorios de articles2
 function getRandomArticles(array: ArticleType[], count: number): ArticleType[] {
